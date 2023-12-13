@@ -18,3 +18,9 @@ function AnswerQuestion() {
   randomizedQuestions.pop();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
+
+console.log(
+  currentQuestion.question,
+  currentQuestion.alternatives,
+  currentQuestion.correctAnswer
+);
