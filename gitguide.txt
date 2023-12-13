@@ -23,3 +23,14 @@ Istället för sista steget, efter att man mergat main in i sin egna branch och 
   På repositoryt (QuizMasters) tryck på "Pull requests", sedan "New pull request" till höger på sidan. 
   Så kan du välja din egna branch, create pull request och sen tror jag du kan godkänna den själv direkt efter.
   Den måste godkännas för att åka in i main.
+
+Enklaste vägen för alltihop:
+1. git add .
+2. git commit -m "min uppdatering är så bra"
+3. git switch main
+4. git pull
+5. git switch <din branch>
+6. git merge main
+  6.1. Lös alla konflikter(Om det finns några)
+7. git push
+8. Gör en pull request på hemsidan
