@@ -1,0 +1,33 @@
+[
+  {
+    "question": "Hur många är vi i vår grupp?",
+    "alternatives": ["4", "2", "3", "1"],
+    "correctAnswer": "4"
+  },
+
+  {
+    "question": "Hur många sköldpaddor måste leva?",
+    "alternatives": ["tre", "två", "en", "fyra"],
+    "correctAnswer": "tre"
+  },
+  {
+    "question": "3?",
+    "alternatives": ["tre", "två", "en", "fyra"],
+    "correctAnswer": "tre"
+  },
+  {
+    "question": "asdste dö?",
+    "alternatives": ["tre", "två", "en", "fyra"],
+    "correctAnswer": "tre"
+  },
+  {
+    "question": "Hur många grodor måste dö?",
+    "alternatives": ["tre", "två", "en", "fyra"],
+    "correctAnswer": "tre"
+  },
+  {
+    "question": "Hur många paddor måste dö?",
+    "alternatives": ["tre", "två", "en", "fyra"],
+    "correctAnswer": "tre"
+  }
+]
