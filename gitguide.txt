@@ -1,0 +1,6 @@
+git add . --- Lägg till allt till att bli committat
+git commit -m "Mitt meddelande" --- commitar ändringarna lokalt
+git push --- laddar upp ändringar.
+git switch 'BranchName' --- byt Branch 
+git merge 'BranchName' --- mergar branchen du är på, med branchen du väljer i BranchName
+git pull --- laddar ned senaste uppdateringar för branchen du är på.
