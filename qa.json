@@ -1,0 +1,12 @@
+[
+    {
+        "question": "Hur många är vi i vår grupp?",
+        "alternatives": ["4", "2", "3", "1"]
+    },
+
+    {
+        "question": "Hur många sköldpaddor måste dö?",
+        "alternatives": ["tre", "två", "en", "fyra"]
+    }
+
+]
