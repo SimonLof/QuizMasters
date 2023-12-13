@@ -13,7 +13,7 @@ git push --- laddar upp ändringar.
 
 git switch 'BranchName' --- byt Branch 
 
-git merge 'BranchName' --- mergar branchen du är på, med branchen du väljer i BranchName
+git merge 'BranchName' --- Mergar BranchName in i branchen du är på.
 
 git pull --- laddar ned senaste uppdateringar för branchen du är på.
 
