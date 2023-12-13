@@ -1,4 +1,4 @@
-import { GetRandomQuestions } from "/modules/questionModule.mjs";
+import { GetRandomQuestions } from "./modules/questionModule.mjs";
 const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
 const timer = document.querySelector(".time"); // Timern

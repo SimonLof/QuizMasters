@@ -1,4 +1,4 @@
-import allQuestionsOrdered from "/questions/qa.json" assert { type: "json" };
+import allQuestionsOrdered from "../questions/qa.json" assert { type: "json" };
 let randomQuestionOrder = [];
 
 export function GetRandomQuestions(params) {
