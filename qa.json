@@ -1,14 +1,12 @@
 [
     {
         "question": "Hur många är vi i vår grupp?",
-        "alternatives": ["1", "2", "3", "4"],
-        "answer": 4
+        "alternatives": ["4", "2", "3", "1"]
     },
 
     {
         "question": "Hur många sköldpaddor måste dö?",
-        "alternatives": ["En", "två", "tre", "fyra"],
-        "answer": 3
+        "alternatives": ["tre", "två", "en", "fyra"]
     }
 
 ]
