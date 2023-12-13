@@ -1,4 +1,4 @@
-{
+[
     {
         "question": "Hur många är vi i vår grupp?",
         "answers": ["1", "2", "3", "4"]
@@ -9,4 +9,4 @@
         "answers": ["En", "två", "tre", "fyra"]
     }
 
-}
+]
