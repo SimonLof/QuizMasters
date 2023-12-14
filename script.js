@@ -6,6 +6,7 @@ const answerBox = document.querySelector(".answers"); // Lådan som håller svar
 const answerButtons = document.querySelectorAll(".alt"); // alla svarsknappar
 
 let lives = 3;
+let points = 0;
 
 // randomizedQuestions är den randomizerade ordningen på alla frågor.
 let randomizedQuestions = GetRandomQuestions();
@@ -17,6 +18,11 @@ function AnswerQuestion() {
   // Här borde det kollas att det är rätt svar, m.m.
   randomizedQuestions.pop();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
+}
+
+function fillQuestion() {
+  questionText.textContent = currentQuestion.question;
+  
 }
 
 console.log(
