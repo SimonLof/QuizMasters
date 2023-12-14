@@ -23,7 +23,6 @@ body {
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	background-color: white;
 }
@@ -40,7 +39,6 @@ body {
 	padding: 10px;
 	border-radius: 15%;
 	box-sizing: border-box;
-	display: inline;
 }
 
 .palette span:nth-child(1) {
@@ -69,4 +67,8 @@ body {
 }
 .palette span:nth-child(8) {
 	background-color: #000000;
+}
+
+.time div {
+	border: 1px solid black;
 }
