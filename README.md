@@ -47,13 +47,13 @@ Istället för sista steget, efter att man mergat main in i sin egna branch och 
   
   Den måste godkännas för att åka in i main.
 
----> Enklaste vägen för alltihop:
+---> TL;DR:
 1. git add .
 2. git commit -m "min uppdatering är så bra"
 3. git switch main
 4. git pull
 5. git switch "din branch"
-6. git merge main
+6. git merge main  
   6.1. Lös alla konflikter(Om det finns några)
 7. git push
 8. Gör en pull request på hemsidan
