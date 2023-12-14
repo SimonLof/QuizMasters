@@ -26,7 +26,8 @@ function fillQuestion() {
 }
 
 console.log(
+  randomizedQuestions.length,
   currentQuestion.question,
-  currentQuestion.alternatives,
+  currentQuestion.answers,
   currentQuestion.correctAnswer
 );
