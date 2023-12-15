@@ -245,7 +245,7 @@ main {
 
 /************ nelly ***********/
 .game {
-  background: rgb(230, 230, 230);
+  background-color: rgb(230, 230, 230);
   width: 60%;
   max-width: 600px;
   margin: 60px auto 0;
@@ -259,7 +259,7 @@ main {
 .question {
   text-align: center;
   font-size: 23px;
-  background: rgb(199, 199, 199);
+  background-color: rgb(199, 199, 199);
   width: 100%;
   max-width: 600px;
   margin: 10px auto 0;
@@ -274,7 +274,7 @@ main {
   margin: 10px 0;
 }
 .btn {
-  background: #fff;
+  background-color: #a33c3c;
   color: #222;
   font-weight: 500;
   font-size: 16px;
@@ -285,8 +285,9 @@ main {
   border-radius: 15px;
   cursor: pointer;
   box-shadow: 0 0 6px 0.5px;
+  transition: all 0.4s;
 }
 .btn:hover {
-  background: #222;
-  color: #fff;
+  background-color: #980d0d;
+  color: #222;
 }
