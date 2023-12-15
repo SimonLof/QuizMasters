@@ -7,6 +7,7 @@ const answerButtons = document.querySelectorAll(".alt"); // alla svarsknappar
 
 let lives = 3;
 let points = 0;
+let userAnswer;
 
 // randomizedQuestions är den randomizerade ordningen på alla frågor.
 let randomizedQuestions = GetRandomQuestions();
@@ -22,7 +23,10 @@ function AnswerQuestion() {
 
 function fillQuestion() {
   questionText.textContent = currentQuestion.question;
-  
+  answerButtons[0].textContent = currentQuestion.answers[0];
+  answerButtons[1].textContent = currentQuestion.answers[1];
+  answerButtons[2].textContent = currentQuestion.answers[2];
+  answerButtons[3].textContent = currentQuestion.answers[3];
 }
 
 console.log(
@@ -31,3 +35,65 @@ console.log(
   currentQuestion.answers,
   currentQuestion.correctAnswer
 );
+
+fillQuestion();
+
+answerButtons[0].addEventListener('click', () => {
+  userAnswer = answerButtons[0].textContent;
+  if (userAnswer === currentQuestion.correctAnswer) {
+    points ++;
+    //ändra färg på knapparna
+    console.log('funkar');
+    fillQuestion();
+  }
+  else {
+    lives --;
+    //ändra färg på knapparna
+    fillQuestion();
+  }
+})
+
+answerButtons[1].addEventListener('click', () => {
+  userAnswer = answerButtons[1].textContent;
+  if (userAnswer === currentQuestion.correctAnswer) {
+    points ++;
+    //ändra färg på knapparna
+    console.log('funkar');
+    fillQuestion();
+  }
+  else {
+    lives --;
+    //ändra färg på knapparna
+    fillQuestion();
+  }
+})
+
+answerButtons[2].addEventListener('click', () => {
+  userAnswer = answerButtons[2].textContent;
+  if (userAnswer === currentQuestion.correctAnswer) {
+    points ++;
+    //ändra färg på knapparna
+    console.log('funkar');
+    fillQuestion();
+  }
+  else {
+    lives --;
+    //ändra färg på knapparna
+    fillQuestion();
+  }
+})
+
+answerButtons[3].addEventListener('click', () => {
+  userAnswer = answerButtons[3].textContent;
+  if (userAnswer === currentQuestion.correctAnswer) {
+    points ++;
+    //ändra färg på knapparna
+    console.log('funkar');
+    fillQuestion();
+  }
+  else {
+    lives --;
+    //ändra färg på knapparna
+    fillQuestion();
+  }
+})
