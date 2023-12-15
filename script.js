@@ -4,8 +4,12 @@ const questionText = document.querySelector(".question"); // Frågans text
 const timer = document.querySelector(".time"); // Timern
 const answerBox = document.querySelector(".answers"); // Lådan som håller svarsknapparna
 const answerButtons = document.querySelectorAll(".alt"); // alla svarsknappar
+const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
+const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
+const starBoard = document.querySelector('#star');
 const timeBar = document.querySelector(".time-bar");
 let lives = 3;
+let points = 0;
 
 let timeToAnswer = 20;
 // randomizedQuestions är den randomizerade ordningen på alla frågor.
@@ -45,4 +49,35 @@ function StartTimer() {
 StartTimer();
 function PlayerTimeOut() {
   // det som händer när man inte svarar i tid.
+}
+
+const palette = document.querySelector(".palette");
+palette.addEventListener('click', () => {
+  UpdateScore();
+  UpdateHearts(true);
+});
+const logo = document.querySelector('#logo');
+logo.addEventListener('click', () => {
+UpdateHearts();
+});
+
+
+// uppdatera poängtavlan
+function UpdateScore(){
+  scoreBoard.innerHTML = ++points;
+}
+
+function UpdateHearts(reset=false){
+  if (reset == true){
+    lives = 3;
+    heartShapedBox.forEach(element => {
+      element.className = 'red';
+    });
+  }
+  else {
+    lives--;
+    for (let i = 0; i < 3 - lives; i++){
+      heartShapedBox[i].className = 'gray';
+    }
+  }
 }
