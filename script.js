@@ -8,38 +8,85 @@ const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const starBoard = document.querySelector("#star");
 const timeBar = document.querySelector(".time-bar");
+
 let lives = 3;
 let points = 0;
+let myTimer;
 
-let timeToAnswer = 20;
-// randomizedQuestions är den randomizerade ordningen på alla frågor.
+let timeToAnswer = 5;
 let randomizedQuestions = GetRandomQuestions();
-// currentQuestion är frågan man är på.
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
-UpdateHearts(true);
-
+// Sätt alla event listeners här.
 answerButtons.forEach(button => {
-  button.addEventListener('click', AnswerQuestion)
+  button.addEventListener('click', AnswerQuestion);
 });
 
+__main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
+
+function __main() {
+  // Jag gjorde en main för jag lacka på javascript.
+  UpdateHearts(true);
+  fillQuestion();
+  answerButtons.forEach(b => b.style.backgroundColor = '#559900');
+}
+
+function DeathFunction() {
+  setTimeout(() => {
+    UpdateHearts(true);
+  }, 2000);
+  SetHighSchore();
+  UpdateScoreBoard(true);
+  points = 0;
+  // stoppa in lite mer saker som händer när man dör. Typ en meny.
+}
+
+function SetHighSchore() {
+  const currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
+  if (currentHighscore === null || points > currentHighscore) {
+    window.localStorage.setItem('highScore', JSON.stringify(points));
+  }
+}
+
 function AnswerQuestion(event) {
-  // Gör just nu bara att man tar bort sista frågan i arrayen, och sätter currentQuestion till nästa fråga.
-  // Här borde det kollas att det är rätt svar, m.m.
   if (event.target.textContent === currentQuestion.correctAnswer) {
-    UpdateScore();
-    updateButtonColor(event, 'green');
-    console.log('funkar');
+    CorrectAnswer(event);
   }
   else {
-    UpdateHearts();
-    updateButtonColor(event, 'red');
+    WrongAnswer(event);
   }
+  NextQuestion();
+}
 
+function CorrectAnswer(event) {
+  UpdateScoreBoard();
+  updateButtonColor(event, 'green');
+  console.log('funkar');
+  clearInterval(myTimer);
+}
 
+function NextQuestion() {
   randomizedQuestions.pop();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
-  fillQuestion();
+  if (randomizedQuestions.length > 0) {
+    setTimeout(() => {
+      fillQuestion();
+    }, 2000);
+  }
+  else { // Gå till menyn här
+    console.log('Slut på frågor!');
+  }
+}
+
+function WrongAnswer(event) {
+  UpdateHearts();
+  if (lives <= 0) {
+    DeathFunction();
+  }
+  if (event) {
+    updateButtonColor(event, 'red');
+  }
+  clearInterval(myTimer);
 }
 
 function updateButtonColor(event, bgColor) {
@@ -47,6 +94,8 @@ function updateButtonColor(event, bgColor) {
 }
 
 function fillQuestion() {
+  answerButtons.forEach(b => b.style.backgroundColor = "#fff");
+  StartTimer();
   questionText.textContent = currentQuestion.question;
   answerButtons[0].textContent = currentQuestion.answers[0];
   answerButtons[1].textContent = currentQuestion.answers[1];
@@ -54,47 +103,24 @@ function fillQuestion() {
   answerButtons[3].textContent = currentQuestion.answers[3];
 }
 
-console.log(
-  randomizedQuestions.length,
-  currentQuestion.question,
-  currentQuestion.answers,
-  currentQuestion.correctAnswer
-);
-
-console.log(timeBar);
-
 function StartTimer() {
   let currentTime = timeToAnswer;
-  // Stoppa timern när man svarat på frågan.
-  const myTimer = setInterval(() => {
+  myTimer = setInterval(() => {
     const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
     timeBar.value = newValue;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
-      clearInterval(myTimer);
-      PlayerTimeOut();
-      alert(":(((((((((((");
+      WrongAnswer();
+      NextQuestion();
     }
   }, 1000 / 60);
 }
-StartTimer();
-function PlayerTimeOut() {
-  // det som händer när man inte svarar i tid.
-}
-
-const palette = document.querySelector(".palette");
-palette.addEventListener("click", () => {
-  UpdateScore();
-  UpdateHearts(true);
-});
-const logo = document.querySelector("#logo");
-logo.addEventListener("click", () => {
-  UpdateHearts();
-});
-
-// uppdatera poängtavlan
-function UpdateScore() {
-  scoreBoard.innerHTML = ++points;
+function UpdateScoreBoard(reset = false) {
+  if (reset) {
+    scoreBoard.innerHTML = 0;
+  } else {
+    scoreBoard.innerHTML = ++points;
+  }
 }
 
 function UpdateHearts(reset = false) {
@@ -110,5 +136,3 @@ function UpdateHearts(reset = false) {
     }
   }
 }
-
-fillQuestion();
