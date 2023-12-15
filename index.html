@@ -3,41 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="./images/favico_qm.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&family=Noto+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/favico_qm.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&family=Noto+Sans:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer type="module"></script>
     <title>QuizMasters</title>
   </head>
   <body>
     <main>
-    <div class="game">
-      <div class="palette">
-        <span>p</span>
-        <span>a</span>
-        <span>l</span>
-        <span>e</span>
-        <span>t</span>
-        <span>t</span>
-        <span>e</span>
-        <span>!</span>
+      <div class="game">
+        <div class="palette">
+          <span>p</span>
+          <span>a</span>
+          <span>l</span>
+          <span>e</span>
+          <span>t</span>
+          <span>t</span>
+          <span>e</span>
+          <span>!</span>
+        </div>
+        <div class="top-bar">
+          <span id="logo">QM</span>
+          <span id="score">&star;</span>
+          <span id="lives">&hearts;&hearts;&hearts;</span>
+        </div>
+        <div class="question">Vad är din fråga egentligen?</div>
+        <div class="time">
+          <progress class="time-bar" max="100" value="69">69%</progress>
+        </div>
+        <div class="answers">
+          <div class="alt">a1</div>
+          <div class="alt">a2</div>
+          <div class="alt">a3</div>
+          <div class="alt">a4</div>
+        </div>
       </div>
-      <div class="top-bar">
-        <span id="logo">QM</span>
-        <span id="score">&star;</span>
-        <span id="lives">&hearts;&hearts;&hearts;</span>
-      </div>
-      <div class="question">Vad är din fråga egentligen?</div>
-      <div class="time">timebar</div>
-      <div class="answers">
-        <div class="alt">a1</div>
-        <div class="alt">a2</div>
-        <div class="alt">a3</div>
-        <div class="alt">a4</div>
-      </div>
-    </div>
-  </main>
+    </main>
   </body>
 </html>
