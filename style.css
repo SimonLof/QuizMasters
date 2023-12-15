@@ -273,8 +273,11 @@ main {
   gap: 10px 20px;
   margin: 10px 0;
 }
+:root {
+  --button-bgcolor: #fff;
+}
 .btn {
-  background-color: #a33c3c;
+  background-color: var(--button-bgcolor);
   color: #222;
   font-weight: 500;
   font-size: 16px;
@@ -288,6 +291,6 @@ main {
   transition: all 0.4s;
 }
 .btn:hover {
-  background-color: #980d0d;
+  background-color: #222;
   color: #222;
 }

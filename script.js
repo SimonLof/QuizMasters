@@ -18,9 +18,10 @@ let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
 // Sätt alla event listeners här.
-answerButtons.forEach(button => {
-  button.addEventListener('click', AnswerQuestion);
+answerButtons.forEach(b => {
+  b.addEventListener('click', AnswerQuestion);
 });
+
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
@@ -28,7 +29,6 @@ function __main() {
   // Jag gjorde en main för jag lacka på javascript.
   UpdateHearts(true);
   fillQuestion();
-  answerButtons.forEach(b => b.style.backgroundColor = '#559900');
 }
 
 function DeathFunction() {
@@ -73,7 +73,7 @@ function NextQuestion() {
 
 function CorrectAnswer(event) {
   UpdateScore();
-  updateButtonColor(event, 'green');
+  updateButtonColor(event.target, 'green');
   console.log('funkar');
   clearInterval(myTimer);
 }
@@ -83,17 +83,17 @@ function WrongAnswer(event) {
     DeathFunction();
   }
   if (event) {
-    updateButtonColor(event, 'red');
+    updateButtonColor(event.target, 'red');
   } else console.log('timeout');
   clearInterval(myTimer);
 }
 
-function updateButtonColor(event, bgColor) {
-  event.target.style.backgroundColor = `${bgColor}`;
+function updateButtonColor(button, bgColor) {
+  button.style.backgroundColor = `${bgColor}`;
 }
 
 function fillQuestion() {
-  answerButtons.forEach(b => b.style.backgroundColor = "#fff");
+  answerButtons.forEach(b => updateButtonColor(b, '#fff'));
   StartTimer();
   questionText.textContent = currentQuestion.question;
   answerButtons[0].textContent = currentQuestion.answers[0];
