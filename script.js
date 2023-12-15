@@ -36,8 +36,7 @@ function DeathFunction() {
     UpdateHearts(true);
   }, 2000);
   SetHighSchore();
-  UpdateScoreBoard(true);
-  points = 0;
+  UpdateScore(true);
   // stoppa in lite mer saker som händer när man dör. Typ en meny.
 }
 
@@ -58,12 +57,6 @@ function AnswerQuestion(event) {
   NextQuestion();
 }
 
-function CorrectAnswer(event) {
-  UpdateScoreBoard();
-  updateButtonColor(event, 'green');
-  console.log('funkar');
-  clearInterval(myTimer);
-}
 
 function NextQuestion() {
   randomizedQuestions.pop();
@@ -78,6 +71,12 @@ function NextQuestion() {
   }
 }
 
+function CorrectAnswer(event) {
+  UpdateScore();
+  updateButtonColor(event, 'green');
+  console.log('funkar');
+  clearInterval(myTimer);
+}
 function WrongAnswer(event) {
   UpdateHearts();
   if (lives <= 0) {
@@ -85,7 +84,7 @@ function WrongAnswer(event) {
   }
   if (event) {
     updateButtonColor(event, 'red');
-  }
+  } else console.log('timeout');
   clearInterval(myTimer);
 }
 
@@ -115,16 +114,19 @@ function StartTimer() {
     }
   }, 1000 / 60);
 }
-function UpdateScoreBoard(reset = false) {
+
+function UpdateScore(reset = false) {
+  // Kan nu resettas med en true i callen. Consistent med hur liven funkar.
   if (reset) {
-    scoreBoard.innerHTML = 0;
+    points = 0;
   } else {
-    scoreBoard.innerHTML = ++points;
+    points++;
   }
+  scoreBoard.innerHTML = points;
 }
 
 function UpdateHearts(reset = false) {
-  if (reset == true) {
+  if (reset === true) {
     lives = 3;
     heartShapedBox.forEach((element) => {
       element.className = "red";
