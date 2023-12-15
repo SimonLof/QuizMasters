@@ -6,7 +6,7 @@ const answerBox = document.querySelector(".answers"); // Lådan som håller svar
 const answerButtons = document.querySelectorAll(".alt"); // alla svarsknappar
 const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
-const starBoard = document.querySelector('#star');
+const starBoard = document.querySelector("#star");
 const timeBar = document.querySelector(".time-bar");
 let lives = 3;
 let points = 0;
@@ -36,7 +36,6 @@ function StartTimer() {
   // Stoppa timern när man svarat på frågan.
   const myTimer = setInterval(() => {
     const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
-    console.log(newValue);
     timeBar.value = newValue;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
@@ -52,32 +51,30 @@ function PlayerTimeOut() {
 }
 
 const palette = document.querySelector(".palette");
-palette.addEventListener('click', () => {
+palette.addEventListener("click", () => {
   UpdateScore();
   UpdateHearts(true);
 });
-const logo = document.querySelector('#logo');
-logo.addEventListener('click', () => {
-UpdateHearts();
+const logo = document.querySelector("#logo");
+logo.addEventListener("click", () => {
+  UpdateHearts();
 });
 
-
 // uppdatera poängtavlan
-function UpdateScore(){
+function UpdateScore() {
   scoreBoard.innerHTML = ++points;
 }
 
-function UpdateHearts(reset=false){
-  if (reset == true){
+function UpdateHearts(reset = false) {
+  if (reset == true) {
     lives = 3;
-    heartShapedBox.forEach(element => {
-      element.className = 'red';
+    heartShapedBox.forEach((element) => {
+      element.className = "red";
     });
-  }
-  else {
+  } else {
     lives--;
-    for (let i = 0; i < 3 - lives; i++){
-      heartShapedBox[i].className = 'gray';
+    for (let i = 0; i < 3 - lives; i++) {
+      heartShapedBox[i].className = "gray";
     }
   }
 }
