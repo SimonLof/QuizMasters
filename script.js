@@ -3,7 +3,7 @@ const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
 const timer = document.querySelector(".time"); // Timern
 const answerBox = document.querySelector(".answers"); // Lådan som håller svarsknapparna
-const answerButtons = document.querySelectorAll(".alt"); // alla svarsknappar
+const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
 const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const starBoard = document.querySelector("#star");
@@ -17,11 +17,41 @@ let randomizedQuestions = GetRandomQuestions();
 // currentQuestion är frågan man är på.
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
-function AnswerQuestion() {
+UpdateHearts(true);
+
+answerButtons.forEach(button => {
+  button.addEventListener('click', AnswerQuestion)
+});
+
+function AnswerQuestion(event) {
   // Gör just nu bara att man tar bort sista frågan i arrayen, och sätter currentQuestion till nästa fråga.
   // Här borde det kollas att det är rätt svar, m.m.
+  if (event.target.textContent === currentQuestion.correctAnswer) {
+    UpdateScore();
+    updateButtonColor(event, 'green');
+    console.log('funkar');
+  }
+  else {
+    UpdateHearts();
+    updateButtonColor(event, 'red');
+  }
+
+
   randomizedQuestions.pop();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
+  fillQuestion();
+}
+
+function updateButtonColor(event, bgColor) {
+  event.target.style.backgroundColor = `${bgColor}`;
+}
+
+function fillQuestion() {
+  questionText.textContent = currentQuestion.question;
+  answerButtons[0].textContent = currentQuestion.answers[0];
+  answerButtons[1].textContent = currentQuestion.answers[1];
+  answerButtons[2].textContent = currentQuestion.answers[2];
+  answerButtons[3].textContent = currentQuestion.answers[3];
 }
 
 console.log(
@@ -30,7 +60,9 @@ console.log(
   currentQuestion.answers,
   currentQuestion.correctAnswer
 );
+
 console.log(timeBar);
+
 function StartTimer() {
   let currentTime = timeToAnswer;
   // Stoppa timern när man svarat på frågan.
@@ -78,3 +110,5 @@ function UpdateHearts(reset = false) {
     }
   }
 }
+
+fillQuestion();
