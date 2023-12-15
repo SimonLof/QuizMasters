@@ -3,22 +3,47 @@ const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
 const timer = document.querySelector(".time"); // Timern
 const answerBox = document.querySelector(".answers"); // Lådan som håller svarsknapparna
-const answerButtons = document.querySelectorAll(".alt"); // alla svarsknappar
-
+const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
+const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
+const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
+const starBoard = document.querySelector("#star");
+const timeBar = document.querySelector(".time-bar");
 let lives = 3;
 let points = 0;
-let userAnswer;
 
+let timeToAnswer = 20;
 // randomizedQuestions är den randomizerade ordningen på alla frågor.
 let randomizedQuestions = GetRandomQuestions();
 // currentQuestion är frågan man är på.
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
-function AnswerQuestion() {
+UpdateHearts(true);
+
+answerButtons.forEach(button => {
+  button.addEventListener('click', AnswerQuestion)
+});
+
+function AnswerQuestion(event) {
   // Gör just nu bara att man tar bort sista frågan i arrayen, och sätter currentQuestion till nästa fråga.
   // Här borde det kollas att det är rätt svar, m.m.
+  if (event.target.textContent === currentQuestion.correctAnswer) {
+    UpdateScore();
+    updateButtonColor(event, 'green');
+    console.log('funkar');
+  }
+  else {
+    UpdateHearts();
+    updateButtonColor(event, 'red');
+  }
+
+
   randomizedQuestions.pop();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
+  fillQuestion();
+}
+
+function updateButtonColor(event, bgColor) {
+  event.target.style.backgroundColor = `${bgColor}`;
 }
 
 function fillQuestion() {
@@ -36,64 +61,54 @@ console.log(
   currentQuestion.correctAnswer
 );
 
+console.log(timeBar);
+
+function StartTimer() {
+  let currentTime = timeToAnswer;
+  // Stoppa timern när man svarat på frågan.
+  const myTimer = setInterval(() => {
+    const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
+    timeBar.value = newValue;
+    currentTime -= 1 / 60;
+    if (currentTime <= 0) {
+      clearInterval(myTimer);
+      PlayerTimeOut();
+      alert(":(((((((((((");
+    }
+  }, 1000 / 60);
+}
+StartTimer();
+function PlayerTimeOut() {
+  // det som händer när man inte svarar i tid.
+}
+
+const palette = document.querySelector(".palette");
+palette.addEventListener("click", () => {
+  UpdateScore();
+  UpdateHearts(true);
+});
+const logo = document.querySelector("#logo");
+logo.addEventListener("click", () => {
+  UpdateHearts();
+});
+
+// uppdatera poängtavlan
+function UpdateScore() {
+  scoreBoard.innerHTML = ++points;
+}
+
+function UpdateHearts(reset = false) {
+  if (reset == true) {
+    lives = 3;
+    heartShapedBox.forEach((element) => {
+      element.className = "red";
+    });
+  } else {
+    lives--;
+    for (let i = 0; i < 3 - lives; i++) {
+      heartShapedBox[i].className = "gray";
+    }
+  }
+}
+
 fillQuestion();
-
-answerButtons[0].addEventListener('click', () => {
-  userAnswer = answerButtons[0].textContent;
-  if (userAnswer === currentQuestion.correctAnswer) {
-    points ++;
-    //ändra färg på knapparna
-    console.log('funkar');
-    fillQuestion();
-  }
-  else {
-    lives --;
-    //ändra färg på knapparna
-    fillQuestion();
-  }
-})
-
-answerButtons[1].addEventListener('click', () => {
-  userAnswer = answerButtons[1].textContent;
-  if (userAnswer === currentQuestion.correctAnswer) {
-    points ++;
-    //ändra färg på knapparna
-    console.log('funkar');
-    fillQuestion();
-  }
-  else {
-    lives --;
-    //ändra färg på knapparna
-    fillQuestion();
-  }
-})
-
-answerButtons[2].addEventListener('click', () => {
-  userAnswer = answerButtons[2].textContent;
-  if (userAnswer === currentQuestion.correctAnswer) {
-    points ++;
-    //ändra färg på knapparna
-    console.log('funkar');
-    fillQuestion();
-  }
-  else {
-    lives --;
-    //ändra färg på knapparna
-    fillQuestion();
-  }
-})
-
-answerButtons[3].addEventListener('click', () => {
-  userAnswer = answerButtons[3].textContent;
-  if (userAnswer === currentQuestion.correctAnswer) {
-    points ++;
-    //ändra färg på knapparna
-    console.log('funkar');
-    fillQuestion();
-  }
-  else {
-    lives --;
-    //ändra färg på knapparna
-    fillQuestion();
-  }
-})
