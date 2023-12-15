@@ -116,8 +116,38 @@ main {
 	background-color: #000000;
 }
 
+.top-bar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	font-size: 24px;
+	padding: 2px;
+}
+
+.top-bar img {
+	width: 24px;
+	height: 24px;
+	padding: 2px;
+}
+
+#star {
+	color: #005c00;
+}
+
+#star:focus {
+	color: yellow;
+	transition: color 1s ease-in;
+}
+
+
+#points { color: black;}
+.red {color:red;}
+.gray { color: darkslategrey;} 
+
+
 .time {
-	border: 1px solid yellow;
+  border: 1px solid yellow;
 	/* width: 320px; */
 	background-color: #27a300;
 	padding: 0;
