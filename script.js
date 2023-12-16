@@ -47,6 +47,16 @@ function SetHighSchore() {
   }
 }
 
+function GetButtonWCorrectAnswer() {
+  let result;
+  answerButtons.forEach(b => {
+    if (b.textContent === currentQuestion.correctAnswer) {
+      result = b;
+    }
+  });
+  return result;
+}
+
 function AnswerQuestion(event) {
   if (event.target.textContent === currentQuestion.correctAnswer) {
     CorrectAnswer(event);
@@ -77,6 +87,7 @@ function CorrectAnswer(event) {
   console.log('funkar');
   clearInterval(myTimer);
 }
+
 function WrongAnswer(event) {
   UpdateHearts();
   if (lives <= 0) {
@@ -85,6 +96,7 @@ function WrongAnswer(event) {
   if (event) {
     updateButtonColor(event.target, 'red');
   } else console.log('timeout');
+  updateButtonColor(GetButtonWCorrectAnswer(), 'lightgreen');
   clearInterval(myTimer);
 }
 
@@ -106,6 +118,8 @@ function StartTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
     const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
+    // kod för att sätta rätt färg på progressBar när den är gjord i div.
+    // >60 grön, > 30 orange, <30 röd
     timeBar.value = newValue;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
@@ -137,4 +151,4 @@ function UpdateHearts(reset = false) {
       heartShapedBox[i].className = "gray";
     }
   }
-}
+};
