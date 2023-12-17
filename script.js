@@ -12,6 +12,7 @@ const timeBar = document.querySelector(".time-bar");
 let lives = 3;
 let points = 0;
 let myTimer;
+let canClick = true;
 
 let timeToAnswer = 5;
 let randomizedQuestions = GetRandomQuestions();
@@ -58,13 +59,16 @@ function GetButtonWCorrectAnswer() {
 }
 
 function AnswerQuestion(event) {
-  if (event.target.textContent === currentQuestion.correctAnswer) {
-    CorrectAnswer(event);
+  if (canClick) {
+    canClick = false;
+    if (event.target.textContent === currentQuestion.correctAnswer) {
+      CorrectAnswer(event);
+    }
+    else {
+      WrongAnswer(event);
+    }
+    NextQuestion();
   }
-  else {
-    WrongAnswer(event);
-  }
-  NextQuestion();
 }
 
 
@@ -74,10 +78,13 @@ function NextQuestion() {
   if (randomizedQuestions.length > 0) {
     setTimeout(() => {
       fillQuestion();
+      canClick = true;
     }, 2000);
   }
   else { // Gå till menyn här
     console.log('Slut på frågor!');
+    alert('slut på frågor. Gå till menyn!');
+    canClick = true;
   }
 }
 
