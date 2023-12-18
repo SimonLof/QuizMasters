@@ -360,6 +360,7 @@ main {
 
   .btn {
     padding: 0.3rem;
+    height: 8vh;
   }
 
   main {
@@ -370,6 +371,25 @@ main {
     flex-direction: column;
     background-color: white;
     justify-content: center;
+  }
+
+  .menu-container {
+    height: 50vh;
+    top: 25vh
+  }
+
+  .menu-btn {
+    height: 3rem;
+  }
+
+  .info-bar {
+    width: 95%;
+    height: 1.1rem;
+  }
+
+  .links ul {
+    display: flex;
+    justify-content: space-evenly;
   }
 }
 
@@ -435,7 +455,6 @@ main {
     height: 90%;
     margin: auto;
     padding: 20px 0;
-
   }
 
   .answer-buttons {
