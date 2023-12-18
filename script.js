@@ -12,15 +12,17 @@ const timeBar = document.querySelector(".time-bar");
 let lives = 3;
 let points = 0;
 let myTimer;
+let canClick = true;
 
 let timeToAnswer = 5;
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
 // Sätt alla event listeners här.
-answerButtons.forEach(button => {
-  button.addEventListener('click', AnswerQuestion);
+answerButtons.forEach(b => {
+  b.addEventListener('click', AnswerQuestion);
 });
+
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
@@ -28,7 +30,6 @@ function __main() {
   // Jag gjorde en main för jag lacka på javascript.
   UpdateHearts(true);
   fillQuestion();
-  answerButtons.forEach(b => b.style.backgroundColor = '#559900');
 }
 
 function DeathFunction() {
@@ -36,8 +37,7 @@ function DeathFunction() {
     UpdateHearts(true);
   }, 2000);
   SetHighSchore();
-  UpdateScoreBoard(true);
-  points = 0;
+  UpdateScore(true);
   // stoppa in lite mer saker som händer när man dör. Typ en meny.
 }
 
@@ -48,22 +48,29 @@ function SetHighSchore() {
   }
 }
 
-function AnswerQuestion(event) {
-  if (event.target.textContent === currentQuestion.correctAnswer) {
-    CorrectAnswer(event);
-  }
-  else {
-    WrongAnswer(event);
-  }
-  NextQuestion();
+function GetButtonWCorrectAnswer() {
+  let result;
+  answerButtons.forEach(b => {
+    if (b.textContent === currentQuestion.correctAnswer) {
+      result = b;
+    }
+  });
+  return result;
 }
 
-function CorrectAnswer(event) {
-  UpdateScoreBoard();
-  updateButtonColor(event, 'green');
-  console.log('funkar');
-  clearInterval(myTimer);
+function AnswerQuestion(event) {
+  if (canClick) {
+    canClick = false;
+    if (event.target.textContent === currentQuestion.correctAnswer) {
+      CorrectAnswer(event);
+    }
+    else {
+      WrongAnswer(event);
+    }
+    NextQuestion();
+  }
 }
+
 
 function NextQuestion() {
   randomizedQuestions.pop();
@@ -71,11 +78,21 @@ function NextQuestion() {
   if (randomizedQuestions.length > 0) {
     setTimeout(() => {
       fillQuestion();
+      canClick = true;
     }, 2000);
   }
   else { // Gå till menyn här
     console.log('Slut på frågor!');
+    alert('slut på frågor. Gå till menyn!');
+    canClick = true;
   }
+}
+
+function CorrectAnswer(event) {
+  UpdateScore();
+  updateButtonColor(event.target, 'green');
+  console.log('funkar');
+  clearInterval(myTimer);
 }
 
 function WrongAnswer(event) {
@@ -84,17 +101,18 @@ function WrongAnswer(event) {
     DeathFunction();
   }
   if (event) {
-    updateButtonColor(event, 'red');
-  }
+    updateButtonColor(event.target, 'red');
+  } else console.log('timeout');
+  updateButtonColor(GetButtonWCorrectAnswer(), 'lightgreen');
   clearInterval(myTimer);
 }
 
-function updateButtonColor(event, bgColor) {
-  event.target.style.backgroundColor = `${bgColor}`;
+function updateButtonColor(button, bgColor) {
+  button.style.backgroundColor = `${bgColor}`;
 }
 
 function fillQuestion() {
-  answerButtons.forEach(b => b.style.backgroundColor = "#fff");
+  answerButtons.forEach(b => updateButtonColor(b, '#fff'));
   StartTimer();
   questionText.textContent = currentQuestion.question;
   answerButtons[0].textContent = currentQuestion.answers[0];
@@ -107,6 +125,8 @@ function StartTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
     const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
+    // kod för att sätta rätt färg på progressBar när den är gjord i div.
+    // >60 grön, > 30 orange, <30 röd
     timeBar.value = newValue;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
@@ -115,18 +135,26 @@ function StartTimer() {
     }
   }, 1000 / 60);
 }
-function UpdateScoreBoard(reset = false) {
+
+function UpdateScore(reset = false) {
+  // Kan nu resettas med en true i callen. Consistent med hur liven funkar.
   if (reset) {
-    scoreBoard.innerHTML = 0;
-  } else {
+    points = 0;
+  }
+  else {
     starBoard.focus();
   	setTimeout(focusAway, 50);
-    scoreBoard.innerHTML = ++points;
+    points++;
   }
+  scoreBoard.innerHTML = points;
+}
+
+function focusAway() {
+  scoreBoard.focus();
 }
 
 function UpdateHearts(reset = false) {
-  if (reset == true) {
+  if (reset === true) {
     lives = 3;
     heartShapedBox.forEach((element) => {
       element.className = "red";
@@ -137,4 +165,4 @@ function UpdateHearts(reset = false) {
       heartShapedBox[i].className = "gray";
     }
   }
-}
+};

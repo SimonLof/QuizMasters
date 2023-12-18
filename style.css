@@ -276,8 +276,11 @@ main {
   gap: 10px 20px;
   margin: 10px 0;
 }
+:root {
+  --button-bgcolor: #fff;
+}
 .btn {
-  background-color: #a33c3c;
+  /* background-color: var(--button-bgcolor); sätts i javascriptet */
   color: #222;
   font-weight: 500;
   font-size: 16px;
@@ -291,6 +294,6 @@ main {
   transition: all 0.4s;
 }
 .btn:hover {
-  background-color: #980d0d;
-  color: #222;
+  /* background-color: #222; funkar inte pga javascript?  men det under funkar*/
+  color: #222; 
 }
