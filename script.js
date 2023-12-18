@@ -8,6 +8,11 @@ const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const starBoard = document.querySelector("#star");
 const timeBar = document.querySelector(".time");
+const menu = document.querySelector('.menu-container');
+const quitButton = document.querySelector('.btn-quit');
+const startButton = document.querySelector('.btn-start');
+
+
 
 let lives = 3;
 let points = 0;
@@ -22,22 +27,33 @@ let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
+console.log(quitButton, startButton);
+quitButton.addEventListener('click', quit);
+startButton.addEventListener('click', StartGame);
 
+function quit() {
+  window.location.href = 'https://nackademin.se';
+}
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
-  BeforeGameStuff();
+  GameMenu();
   // Jag gjorde en main för jag lacka på javascript.
 }
 
 function StartGame(params) {
+  menu.style.display = 'none';
   UpdateHearts(true);
   fillQuestion();
 }
 
-function BeforeGameStuff() {
-  StartGame();
+function ResetGame() {
+
+}
+
+function GameMenu() {
+  menu.style.display = 'flex';
 }
 
 function DeathFunction() {
@@ -46,8 +62,11 @@ function DeathFunction() {
   }, 2000);
   SetHighSchore();
   UpdateScore(true);
+  ResetGame();
   // stoppa in lite mer saker som händer när man dör. Typ en meny.
 }
+
+ResetGame();
 
 function SetHighSchore() {
   const currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));

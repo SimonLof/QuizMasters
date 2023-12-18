@@ -301,3 +301,31 @@ main {
   background-color: #222;
   color: #fff; 
 }
+
+.menu-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  top: 50%;
+  height: 100px;
+  width: 200px;
+  background-color: #27a300;
+  color: #000000;
+  text-align: center;
+  border: 0.5rem #ff0000 dotted;
+  border-radius: 15px;
+}
+
+.menu-btn {
+  background-color: #005C00;
+  color: #ECFFEB;
+  border-radius: 15px;
+  width: 60%;
+}
+
+.menu-btn:hover {
+  color: yellow;
+}
+
