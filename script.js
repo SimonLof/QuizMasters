@@ -6,12 +6,14 @@ const answerBox = document.querySelector(".answers"); // Lådan som håller svar
 const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
 const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
+const highsoreBoard = document.querySelector('#hiscore-points');
 const starBoard = document.querySelector("#star");
 const timeBar = document.querySelector(".time");
 const menu = document.querySelector('.menu-container');
 const quitButton = document.querySelector('.btn-quit');
 const startButton = document.querySelector('.btn-start');
 const menuText = document.querySelector('.menu-text');
+
 
 
 
@@ -28,7 +30,6 @@ let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
-console.log(quitButton, startButton);
 quitButton.addEventListener('click', quit);
 startButton.addEventListener('click', StartGame);
 
@@ -43,7 +44,6 @@ function __main() {
   questionText.textContent = 'QuizMasters!';
   answerButtons.forEach((b) => b.textContent = '');
   GameMenu();
-  // Jag gjorde en main för jag lacka på javascript.
 }
 
 function StartGame(params) {
@@ -72,6 +72,7 @@ function SetHighSchore() {
   if (currentHighscore === null || points > currentHighscore) {
     window.localStorage.setItem('highScore', JSON.stringify(points));
   }
+  highsoreBoard.innerHTML = currentHighscore;
 }
 
 function GetButtonWCorrectAnswer() {
