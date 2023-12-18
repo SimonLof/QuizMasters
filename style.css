@@ -238,9 +238,9 @@ main {
   width: 100%;
 }
 
-/* .quiz-box {
-  padding: 20px 0;
-} */
+.quiz-box {
+  padding: 0 20px;
+}
 
 .question {
   text-align: center;
@@ -249,7 +249,7 @@ main {
   align-items: center;
   font-size: 23px;
   background-color: white;
-  width: 100%;
+  /* width: 100%; */
   height: 10vh;
   max-height: 100px;
   min-height: 100px;
