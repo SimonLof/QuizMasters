@@ -59,7 +59,7 @@ function StartGame() {
 }
 
 function GameMenu(firstTime = false) {
-  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length) + 1;
+  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
   menuGreeting.textContent = xmaxGreeting[randomGreeting];
   menu.style.display = 'flex';
   if (!firstTime) {
