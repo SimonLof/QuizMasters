@@ -140,10 +140,17 @@ function UpdateScore(reset = false) {
   // Kan nu resettas med en true i callen. Consistent med hur liven funkar.
   if (reset) {
     points = 0;
-  } else {
+  }
+  else {
+    starBoard.focus();
+  	setTimeout(focusAway, 50);
     points++;
   }
   scoreBoard.innerHTML = points;
+}
+
+function focusAway() {
+  scoreBoard.focus();
 }
 
 function UpdateHearts(reset = false) {

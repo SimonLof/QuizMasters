@@ -212,17 +212,20 @@ main {
 }
 
 #star {
-  color: #005c00;
+	color: yellow;
+	text-shadow: 2px 1px 2px darkslategray;
+	transition: all 50ms ease-in;
+	opacity: 1;
 }
-
 #star:focus {
-  color: yellow;
-  transition: color 1s ease-in;
+	color: orange;
+	text-shadow: none;
+	outline: none;
 }
 
-#points {
-  color: black;
-}
+#points { color: black;}
+#points:focus { outline: none;}
+
 .red {
   color: red;
 }
