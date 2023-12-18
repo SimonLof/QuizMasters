@@ -425,6 +425,7 @@ main {
   main {
     max-width: 800px;
     min-height: 720px;
+    max-height: 820px;
     width: 100%;
     height: 90%;
   }
