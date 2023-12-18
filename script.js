@@ -11,6 +11,7 @@ const timeBar = document.querySelector(".time");
 const menu = document.querySelector('.menu-container');
 const quitButton = document.querySelector('.btn-quit');
 const startButton = document.querySelector('.btn-start');
+const menuText = document.querySelector('.menu-text');
 
 
 
@@ -19,7 +20,7 @@ let points = 0;
 let myTimer;
 let canClick = true;
 
-let timeToAnswer = 5;
+let timeToAnswer = 10;
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
@@ -38,6 +39,9 @@ function quit() {
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
+  menuText.textContent = 'God jul!';
+  questionText = 'QuizMasters!';
+  answerButtons.forEach((b) => b.textContent = '');
   GameMenu();
   // Jag gjorde en main för jag lacka på javascript.
 }
@@ -53,10 +57,12 @@ function StartGame(params) {
 
 function GameMenu() {
   menu.style.display = 'flex';
+  menuText.textContent = 'Du fick ' + points + " poäng.";
   canClick = false;
 }
 
 function DeathFunction() {
+  GameMenu();
   randomizedQuestions = GetRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
@@ -90,7 +96,6 @@ function AnswerQuestion(event) {
     if (lives > 0)
       NextQuestion();
     else {
-      GameMenu();
       DeathFunction();
     }
   }
@@ -123,7 +128,7 @@ function WrongAnswer(event) {
   StopTimer();
   if (event) {
     updateButtonColor(event.target, 'red');
-  } else console.log('timeout');
+  }
   updateButtonColor(GetButtonWCorrectAnswer(), 'lightgreen');
 }
 
@@ -154,7 +159,12 @@ function StartTimer() {
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
       WrongAnswer();
-      NextQuestion();
+      if (lives > 0) {
+        NextQuestion();
+      }
+      else {
+        DeathFunction();
+      }
     }
   }, 1000 / 60);
 }
