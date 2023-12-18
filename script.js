@@ -42,9 +42,6 @@ function quit() {
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
-  questionText.textContent = 'QuizMasters!';
-  answerButtons.forEach((b) => b.textContent = ' ');
-
   GameMenu(true);
 }
 

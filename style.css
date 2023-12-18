@@ -308,11 +308,21 @@ main {
   border-radius: 15px;
 }
 
+.menu-greeting {
+  color: red;
+  font-size: 2rem;
+  text-shadow: 3px 3px 3px black;
+  font-weight: 800;
+}
+
 .menu-btn {
+  font-weight: 800;
+  text-shadow: 1px 1px 2px black;
   background-color: #005C00;
-  color: #ECFFEB;
+  color: gold;
   border-radius: 15px;
   width: 60%;
+  box-shadow: 2px 2px 4px #222;
 }
 
 /* mobil */
