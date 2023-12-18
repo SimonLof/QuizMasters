@@ -164,6 +164,7 @@ function StartTimer() {
     }
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
+      canClick = false;
       WrongAnswer();
       if (lives > 0) {
         NextQuestion();

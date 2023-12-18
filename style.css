@@ -286,8 +286,8 @@ main {
   transition: all 0.4s;
 }
 
-.btn:active {
-  color: yellow;
+.btn:hover {
+  background-color: #888;
 }
 
 .info-bar {
@@ -441,5 +441,4 @@ main {
     height: 90%;
     margin: auto;
   }
-
 }
