@@ -7,7 +7,7 @@ const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
 const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const starBoard = document.querySelector("#star");
-const timeBar = document.querySelector(".time-bar");
+const timeBar = document.querySelector(".time");
 
 let lives = 3;
 let points = 0;
@@ -27,9 +27,17 @@ answerButtons.forEach(b => {
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
+  BeforeGameStuff();
   // Jag gjorde en main för jag lacka på javascript.
+}
+
+function StartGame(params) {
   UpdateHearts(true);
   fillQuestion();
+}
+
+function BeforeGameStuff() {
+  StartGame();
 }
 
 function DeathFunction() {
@@ -107,7 +115,7 @@ function WrongAnswer(event) {
   clearInterval(myTimer);
 }
 
-function updateButtonColor(button, bgColor) {
+function updateButtonColor(button, bgColor = '') {
   button.style.backgroundColor = `${bgColor}`;
 }
 
@@ -127,7 +135,10 @@ function StartTimer() {
     const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
     // kod för att sätta rätt färg på progressBar när den är gjord i div.
     // >60 grön, > 30 orange, <30 röd
-    timeBar.value = newValue;
+    timeBar.style.width = `${newValue}%`;
+    if (newValue < 1) {
+
+    }
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
       WrongAnswer();
@@ -143,7 +154,7 @@ function UpdateScore(reset = false) {
   }
   else {
     starBoard.focus();
-  	setTimeout(focusAway, 150);
+    setTimeout(focusAway, 150);
     points++;
   }
   scoreBoard.innerHTML = points;
