@@ -119,6 +119,8 @@ function UpdateScoreBoard(reset = false) {
   if (reset) {
     scoreBoard.innerHTML = 0;
   } else {
+    starBoard.focus();
+  	setTimeout(focusAway, 50);
     scoreBoard.innerHTML = ++points;
   }
 }
