@@ -151,14 +151,15 @@ main {
 .answer-buttons{
     display: grid;
     grid-template-columns: repeat(2,auto);
-    gap: 10px 20px;
+    gap: 10px 40px;
     margin: 10px 0;
 }
 .btn{
     background: #fff;
     color: #222;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
+	text-wrap:wrap;
     border: 1px solid #222;
     padding: 40px;
     margin: 10px 0;
@@ -166,6 +167,9 @@ main {
     border-radius: 15px;
     cursor: pointer;
     box-shadow: 0 0 6px 0.5px;
+	width: 280px;
+	max-width: 280px;
+	max-height: 100px;
 }
 .btn:hover{
     background: #222;
