@@ -149,9 +149,14 @@ function fillQuestion() {
 function StartTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
-    const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
-    // kod för att sätta rätt färg på progressBar när den är gjord i div.
-    // >60 grön, > 30 orange, <30 röd
+    const newValue = `${(currentTime / timeToAnswer) * 100}`;
+    if (newValue > 60) {
+      timeBar.style.backgroundColor = `green`;
+    } else if (newValue > 30) {
+      timeBar.style.backgroundColor = `orange`;
+    } else {
+      timeBar.style.backgroundColor = `red`;
+    }
     timeBar.style.width = `${newValue}%`;
     if (newValue < 1) {
 
@@ -168,7 +173,7 @@ function StartTimer() {
     }
   }, 1000 / 60);
 }
-
+"";
 function StopTimer() {
   clearInterval(myTimer);
 }
