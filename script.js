@@ -14,10 +14,9 @@ const quitButton = document.querySelector('.btn-quit');
 const startButton = document.querySelector('.btn-start');
 const menuText = document.querySelector('.menu-text');
 
+const maxLives = 30;
 
-
-
-let lives = 3;
+let lives = 0;
 let points = 0;
 let myTimer;
 let canClick = true;
@@ -42,14 +41,13 @@ __main(); // Kör allt i main, därför att ha kod som körs på olika ställen 
 function __main() {
   menuText.textContent = 'God jul!';
   questionText.textContent = 'QuizMasters!';
-  answerButtons.forEach((b) => b.textContent = '');
+  answerButtons.forEach((b) => b.textContent = ' ');
   GameMenu();
 }
 
-function StartGame(params) {
+function StartGame() {
   menu.style.display = 'none';
   UpdateHearts(true);
-  SetHighSchore();
   UpdateScore(true);
   fillQuestion();
   canClick = true;
@@ -62,6 +60,7 @@ function GameMenu() {
 }
 
 function DeathFunction() {
+  SetHighSchore();
   GameMenu();
   randomizedQuestions = GetRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
@@ -111,9 +110,10 @@ function NextQuestion() {
       canClick = true;
     }, 2000);
   }
-  else { // Gå till menyn här
+  else {
+    DeathFunction();
     GameMenu();
-    canClick = true;
+    canClick = false;
   }
 }
 
@@ -141,10 +141,15 @@ function fillQuestion() {
   answerButtons.forEach(b => updateButtonColor(b, ''));
   StartTimer();
   questionText.textContent = currentQuestion.question;
-  answerButtons[0].textContent = currentQuestion.answers[0];
-  answerButtons[1].textContent = currentQuestion.answers[1];
-  answerButtons[2].textContent = currentQuestion.answers[2];
-  answerButtons[3].textContent = currentQuestion.answers[3];
+  answerButtons.forEach(b => b.textContent = '');
+  currentQuestion.answers.forEach(a => {
+    let randInt = Math.floor(Math.random() * 4);
+    while (answerButtons[randInt].textContent !== '') {
+      randInt = Math.floor(Math.random() * 4);
+      console.log(randInt);
+    }
+    answerButtons[randInt].textContent = a;
+  });
 }
 
 function StartTimer() {
@@ -159,9 +164,6 @@ function StartTimer() {
       timeBar.style.backgroundColor = `red`;
     }
     timeBar.style.width = `${newValue}%`;
-    if (newValue < 1) {
-
-    }
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
       canClick = false;
@@ -175,31 +177,31 @@ function StartTimer() {
     }
   }, 1000 / 60);
 }
-"";
+
 function StopTimer() {
   clearInterval(myTimer);
 }
 
 function UpdateScore(reset = false) {
-  // Kan nu resettas med en true i callen. Consistent med hur liven funkar.
   if (reset) {
     points = 0;
   }
   else {
-    starBoard.focus();
-    setTimeout(focusAway, 150);
+    starBoard.style.opacity = 0;
+    setTimeout(comeBack, 250);
     points++;
+    SetHighSchore();
   }
   scoreBoard.innerHTML = points;
 }
 
-function focusAway() {
-  scoreBoard.focus();
+function comeBack() {
+  starBoard.style.opacity = 1;
 }
 
 function UpdateHearts(reset = false) {
   if (reset === true) {
-    lives = 3;
+    lives = maxLives;
     heartShapedBox.forEach((element) => {
       element.className = "red";
     });
