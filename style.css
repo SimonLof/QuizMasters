@@ -214,13 +214,14 @@ main {
 #star {
 	color: yellow;
 	text-shadow: 2px 1px 2px darkslategray;
-	transition: all 50ms ease-in;
+	transition: all 150ms ease-in;
 	opacity: 1;
 }
 #star:focus {
-	color: orange;
+	color: white;
 	text-shadow: none;
-	outline: none;
+  opacity: 0;
+  outline: none;
 }
 
 #points { color: black;}
@@ -228,6 +229,8 @@ main {
 
 .red {
   color: red;
+  text-shadow: 2px 1px 2px darkslategray;
+	transition: all 50ms ease-in;
 }
 .gray {
   color: darkslategrey;
