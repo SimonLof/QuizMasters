@@ -136,64 +136,15 @@ body {
   background-color: #ecffeb;
   display: flex;
   justify-content: center;
+  background-repeat: repeat;
 }
 
 main {
-  width: 70%;
-  margin: 10px auto;
+  /* width: 70%; */
+  margin: 3rem 4rem;
   display: flex;
   background-color: white;
   justify-content: center;
-}
-
-.game {
-  display: flex;
-  flex-direction: column;
-}
-
-.palette {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-}
-
-.palette span {
-  box-sizing: border-box;
-  width: 40px;
-  height: 40px;
-  color: #ecffeb;
-  text-align: center;
-  padding: 18;
-  border-radius: 5px;
-}
-
-.palette span:nth-child(1) {
-  background-color: #5c0000;
-}
-.palette span:nth-child(1) {
-  background-color: #751717;
-}
-.palette span:nth-child(2) {
-  background-color: #ba0c0c;
-}
-.palette span:nth-child(3) {
-  background-color: #ff0000;
-}
-.palette span:nth-child(4) {
-  background-color: #27a300;
-}
-.palette span:nth-child(5) {
-  background-color: #2a850e;
-}
-.palette span:nth-child(6) {
-  background-color: #2d661b;
-}
-.palette span:nth-child(7) {
-  background-color: #005c00;
-}
-.palette span:nth-child(8) {
-  background-color: #000000;
 }
 
 .top-bar {
@@ -201,14 +152,13 @@ main {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  font-size: 24px;
+  font-size: 2rem;
   padding: 2px;
 }
 
 .top-bar img {
-  width: 24px;
-  height: 24px;
-  padding: 2px;
+  height: 2rem;
+  padding-top: 0.2rem;
 }
 
 #star {
@@ -224,7 +174,12 @@ main {
   outline: none;
 }
 
-#points { color: black;}
+#points { 
+  color: black;
+  font-weight: 600;
+  font-size: 1.5rem;
+  
+}
 #points:focus { outline: none;}
 
 .red {
@@ -252,13 +207,13 @@ main {
 
 /************ nelly ***********/
 .game {
-  background-color: rgb(230, 230, 230);
+  background-color: #ffebeb;
   width: 60%;
   max-width: 600px;
-  margin: 60px auto 0;
+  margin: 3rem 3rem;
   border-radius: 10px;
   padding: 10px 50px 10px;
-  font-family: "Courier New", Courier, monospace;
+  
 }
 .quiz-box {
   padding: 20px 0;
@@ -266,7 +221,7 @@ main {
 .question {
   text-align: center;
   font-size: 23px;
-  background-color: rgb(199, 199, 199);
+  background-color: white;
   width: 100%;
   max-width: 600px;
   margin: 10px auto 0;
