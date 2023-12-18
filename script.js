@@ -13,17 +13,20 @@ const menu = document.querySelector('.menu-container');
 const quitButton = document.querySelector('.btn-quit');
 const startButton = document.querySelector('.btn-start');
 const menuText = document.querySelector('.menu-text');
+const menuGreeting = document.querySelector('.menu-greeting');
 
-const maxLives = 30;
+const maxLives = 3;
 
-let lives = 0;
+let lives = maxLives;
 let points = 0;
 let myTimer;
 let canClick = true;
 
-let timeToAnswer = 1;
+let timeToAnswer = 10;
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
+
+const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe Weihnachten!', 'Buon Natale!', 'Feliz Natal!', 'Crăciun Fericit!', 'Glædelig Jul!', 'Hyvää Joulua!', 'Gleðileg Jól!', 'Wesołych Świąt!', 'Vrolijk Kerstfeest!', 'Sretan Božić!', 'Veselé Vánoce!', 'Felicem Natalem Christi!', 'Nollaig Shona!', 'Merry Christmas!', 'Happy Holidays!'];
 
 // Sätt alla event listeners här.
 answerButtons.forEach(b => {
@@ -39,11 +42,13 @@ function quit() {
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
-  menuText.textContent = 'God jul!';
   questionText.textContent = 'QuizMasters!';
   answerButtons.forEach((b) => b.textContent = ' ');
-  GameMenu();
+
+  GameMenu(true);
 }
+
+
 
 function StartGame() {
   menu.style.display = 'none';
@@ -53,9 +58,13 @@ function StartGame() {
   canClick = true;
 }
 
-function GameMenu() {
+function GameMenu(firstTime = false) {
+  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length) + 1;
+  menuGreeting.textContent = xmaxGreeting[randomGreeting];
   menu.style.display = 'flex';
-  menuText.textContent = 'Du fick ' + points + " poäng.";
+  if (!firstTime) {
+    menuText.textContent = 'Du fick ' + points + " poäng.";
+  }
   canClick = false;
 }
 
