@@ -7,7 +7,12 @@ const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
 const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const starBoard = document.querySelector("#star");
-const timeBar = document.querySelector(".time-bar");
+const timeBar = document.querySelector(".time");
+const menu = document.querySelector('.menu-container');
+const quitButton = document.querySelector('.btn-quit');
+const startButton = document.querySelector('.btn-start');
+
+
 
 let lives = 3;
 let points = 0;
@@ -22,23 +27,38 @@ let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
+console.log(quitButton, startButton);
+quitButton.addEventListener('click', quit);
+startButton.addEventListener('click', StartGame);
 
+function quit() {
+  window.location.href = 'https://nackademin.se';
+}
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
+  GameMenu();
   // Jag gjorde en main för jag lacka på javascript.
+}
+
+function StartGame(params) {
+  menu.style.display = 'none';
   UpdateHearts(true);
+  SetHighSchore();
+  UpdateScore(true);
   fillQuestion();
+  canClick = true;
+}
+
+function GameMenu() {
+  menu.style.display = 'flex';
+  canClick = false;
 }
 
 function DeathFunction() {
-  setTimeout(() => {
-    UpdateHearts(true);
-  }, 2000);
-  SetHighSchore();
-  UpdateScore(true);
-  // stoppa in lite mer saker som händer när man dör. Typ en meny.
+  randomizedQuestions = GetRandomQuestions();
+  currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
 
 function SetHighSchore() {
@@ -67,10 +87,14 @@ function AnswerQuestion(event) {
     else {
       WrongAnswer(event);
     }
-    NextQuestion();
+    if (lives > 0)
+      NextQuestion();
+    else {
+      GameMenu();
+      DeathFunction();
+    }
   }
 }
-
 
 function NextQuestion() {
   randomizedQuestions.pop();
@@ -82,8 +106,7 @@ function NextQuestion() {
     }, 2000);
   }
   else { // Gå till menyn här
-    console.log('Slut på frågor!');
-    alert('slut på frågor. Gå till menyn!');
+    GameMenu();
     canClick = true;
   }
 }
@@ -92,27 +115,24 @@ function CorrectAnswer(event) {
   UpdateScore();
   updateButtonColor(event.target, 'green');
   console.log('funkar');
-  clearInterval(myTimer);
+  StopTimer();
 }
 
 function WrongAnswer(event) {
   UpdateHearts();
-  if (lives <= 0) {
-    DeathFunction();
-  }
+  StopTimer();
   if (event) {
     updateButtonColor(event.target, 'red');
   } else console.log('timeout');
   updateButtonColor(GetButtonWCorrectAnswer(), 'lightgreen');
-  clearInterval(myTimer);
 }
 
-function updateButtonColor(button, bgColor) {
+function updateButtonColor(button, bgColor = '') {
   button.style.backgroundColor = `${bgColor}`;
 }
 
 function fillQuestion() {
-  answerButtons.forEach(b => updateButtonColor(b, '#fff'));
+  answerButtons.forEach(b => updateButtonColor(b, ''));
   StartTimer();
   questionText.textContent = currentQuestion.question;
   answerButtons[0].textContent = currentQuestion.answers[0];
@@ -127,13 +147,20 @@ function StartTimer() {
     const newValue = `${(currentTime / timeToAnswer) * 100}`; // Få procent istället för att räkna på sekunder.
     // kod för att sätta rätt färg på progressBar när den är gjord i div.
     // >60 grön, > 30 orange, <30 röd
-    timeBar.value = newValue;
+    timeBar.style.width = `${newValue}%`;
+    if (newValue < 1) {
+
+    }
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
       WrongAnswer();
       NextQuestion();
     }
   }, 1000 / 60);
+}
+
+function StopTimer() {
+  clearInterval(myTimer);
 }
 
 function UpdateScore(reset = false) {
@@ -143,7 +170,7 @@ function UpdateScore(reset = false) {
   }
   else {
     starBoard.focus();
-  	setTimeout(focusAway, 150);
+    setTimeout(focusAway, 150);
     points++;
   }
   scoreBoard.innerHTML = points;
