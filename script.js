@@ -20,7 +20,7 @@ let points = 0;
 let myTimer;
 let canClick = true;
 
-let timeToAnswer = 10;
+let timeToAnswer = 1;
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
@@ -40,7 +40,7 @@ __main(); // Kör allt i main, därför att ha kod som körs på olika ställen 
 
 function __main() {
   menuText.textContent = 'God jul!';
-  questionText = 'QuizMasters!';
+  questionText.textContent = 'QuizMasters!';
   answerButtons.forEach((b) => b.textContent = '');
   GameMenu();
   // Jag gjorde en main för jag lacka på javascript.
