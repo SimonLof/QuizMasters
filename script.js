@@ -143,7 +143,7 @@ function UpdateScore(reset = false) {
   }
   else {
     starBoard.focus();
-  	setTimeout(focusAway, 50);
+  	setTimeout(focusAway, 150);
     points++;
   }
   scoreBoard.innerHTML = points;
