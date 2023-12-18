@@ -45,28 +45,21 @@ function __main() {
 function StartGame(params) {
   menu.style.display = 'none';
   UpdateHearts(true);
+  SetHighSchore();
+  UpdateScore(true);
   fillQuestion();
-}
-
-function ResetGame() {
-
+  canClick = true;
 }
 
 function GameMenu() {
   menu.style.display = 'flex';
+  canClick = false;
 }
 
 function DeathFunction() {
-  setTimeout(() => {
-    UpdateHearts(true);
-  }, 2000);
-  SetHighSchore();
-  UpdateScore(true);
-  ResetGame();
-  // stoppa in lite mer saker som händer när man dör. Typ en meny.
+  randomizedQuestions = GetRandomQuestions();
+  currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
-
-ResetGame();
 
 function SetHighSchore() {
   const currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
@@ -94,10 +87,14 @@ function AnswerQuestion(event) {
     else {
       WrongAnswer(event);
     }
-    NextQuestion();
+    if (lives > 0)
+      NextQuestion();
+    else {
+      GameMenu();
+      DeathFunction();
+    }
   }
 }
-
 
 function NextQuestion() {
   randomizedQuestions.pop();
@@ -109,8 +106,7 @@ function NextQuestion() {
     }, 2000);
   }
   else { // Gå till menyn här
-    console.log('Slut på frågor!');
-    alert('slut på frågor. Gå till menyn!');
+    GameMenu();
     canClick = true;
   }
 }
@@ -119,19 +115,16 @@ function CorrectAnswer(event) {
   UpdateScore();
   updateButtonColor(event.target, 'green');
   console.log('funkar');
-  clearInterval(myTimer);
+  StopTimer();
 }
 
 function WrongAnswer(event) {
   UpdateHearts();
-  if (lives <= 0) {
-    DeathFunction();
-  }
+  StopTimer();
   if (event) {
     updateButtonColor(event.target, 'red');
   } else console.log('timeout');
   updateButtonColor(GetButtonWCorrectAnswer(), 'lightgreen');
-  clearInterval(myTimer);
 }
 
 function updateButtonColor(button, bgColor = '') {
@@ -139,7 +132,7 @@ function updateButtonColor(button, bgColor = '') {
 }
 
 function fillQuestion() {
-  answerButtons.forEach(b => updateButtonColor(b, '#fff'));
+  answerButtons.forEach(b => updateButtonColor(b, ''));
   StartTimer();
   questionText.textContent = currentQuestion.question;
   answerButtons[0].textContent = currentQuestion.answers[0];
@@ -164,6 +157,10 @@ function StartTimer() {
       NextQuestion();
     }
   }, 1000 / 60);
+}
+
+function StopTimer() {
+  clearInterval(myTimer);
 }
 
 function UpdateScore(reset = false) {

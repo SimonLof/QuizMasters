@@ -91,6 +91,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -105,17 +106,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -123,6 +128,7 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -162,31 +168,36 @@ main {
 }
 
 #star {
-	color: yellow;
-	text-shadow: 2px 1px 2px darkslategray;
-	transition: all 150ms ease-in;
-	opacity: 1;
+  color: yellow;
+  text-shadow: 2px 1px 2px darkslategray;
+  transition: all 150ms ease-in;
+  opacity: 1;
 }
+
 #star:focus {
-	color: white;
-	text-shadow: none;
+  color: white;
+  text-shadow: none;
   opacity: 0;
   outline: none;
 }
 
-#points { 
+#points {
   color: black;
   font-weight: 600;
   font-size: 1.5rem;
-  
+
 }
-#points:focus { outline: none;}
+
+#points:focus {
+  outline: none;
+}
 
 .red {
   color: red;
   text-shadow: 2px 1px 2px darkslategray;
-	transition: all 50ms ease-in;
+  transition: all 50ms ease-in;
 }
+
 .gray {
   color: darkslategrey;
 }
@@ -213,11 +224,13 @@ main {
   margin: 3rem 3rem;
   border-radius: 10px;
   padding: 10px 50px 10px;
-  
+  width: 100%;
 }
+
 .quiz-box {
   padding: 20px 0;
 }
+
 .question {
   text-align: center;
   font-size: 23px;
@@ -229,15 +242,18 @@ main {
   padding: 60px 0 60px;
   box-shadow: 0 0 10px 2px;
 }
+
 .answer-buttons {
   display: grid;
   grid-template-columns: repeat(2, auto);
   gap: 10px 20px;
   margin: 10px 0;
 }
+
 :root {
   --button-bgcolor: #fff;
 }
+
 .btn {
   background-color: var(--button-bgcolor);
   color: #222;
@@ -252,9 +268,10 @@ main {
   box-shadow: 0 0 6px 0.5px;
   transition: all 0.4s;
 }
+
 .btn:hover {
   background-color: #222;
-  color: #fff; 
+  color: #fff;
 }
 
 .menu-container {
@@ -283,4 +300,3 @@ main {
 .menu-btn:hover {
   color: yellow;
 }
-
