@@ -141,16 +141,20 @@ body {
   font-family: "Noto Sans", sans-serif;
   background-color: #ecffeb;
   display: flex;
+  height: 100vh;
+  width: 100vw;
   justify-content: center;
   background-repeat: repeat;
 }
 
 main {
-  /* width: 70%; */
+  width: 70%;
   margin: 3rem 4rem;
   display: flex;
+  flex-direction: column;
   background-color: white;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .top-bar {
@@ -174,6 +178,13 @@ main {
   opacity: 1;
 }
 
+#heyscore-star {
+  color: orange;
+  text-shadow: 2px 1px 2px darkslategray;
+  transition: all 150ms ease-in;
+  opacity: 1;
+}
+
 #star:focus {
   color: white;
   text-shadow: none;
@@ -185,7 +196,12 @@ main {
   color: black;
   font-weight: 600;
   font-size: 1.5rem;
+}
 
+#hiscore-points {
+  color: black;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 #points:focus {
@@ -216,11 +232,9 @@ main {
 /************ nelly ***********/
 .game {
   background-color: #ffebeb;
-  width: 60%;
+  width: 100%;
   max-width: 600px;
-  margin: 3rem 3rem;
   border-radius: 10px;
-  padding: 10px 50px 10px;
   width: 100%;
 }
 
@@ -230,9 +244,15 @@ main {
 
 .question {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 23px;
   background-color: white;
   width: 100%;
+  height: 10vh;
+  max-height: 100px;
+  min-height: 100px;
   max-width: 600px;
   margin: 10px auto 0;
   border-radius: 15px;
@@ -242,9 +262,9 @@ main {
 
 .answer-buttons {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
   gap: 10px 20px;
-  margin: 10px 0;
 }
 
 :root {
@@ -266,8 +286,28 @@ main {
   transition: all 0.4s;
 }
 
-.btn:active {
-  color: yellow;
+.btn:hover {
+  background-color: #888;
+}
+
+.info-bar {
+  width: 5rem;
+  height: 4.1rem;
+  border: 2px pink solid;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fdfdf0;
+}
+
+.links a {
+  text-decoration: none;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: #000000;
+}
+
+.links a:hover {
+  color: red;
 }
 
 .menu-container {
@@ -336,6 +376,7 @@ main {
     height: 100vh;
     margin: 0;
     display: flex;
+    flex-direction: column;
     background-color: white;
     justify-content: center;
   }
@@ -380,7 +421,24 @@ main {
     height: 100%;
     margin: 0;
     display: flex;
+    flex-direction: column;
     background-color: white;
     justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  main {
+    max-width: 800px;
+    min-height: 720px;
+    width: 100%;
+    height: 90%;
+  }
+
+  .quiz-box {
+    width: 90%;
+    height: 90%;
+    margin: auto;
   }
 }
