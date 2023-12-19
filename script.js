@@ -1,3 +1,4 @@
+//#region Variabler
 import { GetRandomQuestions } from "./modules/questionModule.mjs";
 const mainWhiteSquare = document.querySelector('main');
 const game = document.querySelector(".game"); // Hela gamerutan
@@ -29,9 +30,10 @@ let canClick = true;
 
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
-
 const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe Weihnachten!', 'Buon Natale!', 'Feliz Natal!', 'Crăciun Fericit!', 'Glædelig Jul!', 'Hyvää Joulua!', 'Gleðileg Jól!', 'Wesołych Świąt!', 'Vrolijk Kerstfeest!', 'Sretan Božić!', 'Veselé Vánoce!', 'Felicem Natalem Christi!', 'Nollaig Shona!', 'Merry Christmas!', 'Happy Holidays!'];
+//#endregion
 
+//#region event listeners
 // Sätt alla event listeners här.
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
@@ -41,15 +43,20 @@ startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
 logo.addEventListener('click', BorderStyleSwap);
 
-function quit() {
-  window.location.href = 'https://nackademin.se';
-}
+
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
+  TurnOffHoverEffect();
   SetHighScore();
   GameMenu(true);
+}
+
+
+//#region Menu stuff
+function TurnOffHoverEffect() {
+  answerButtons.forEach(b => updateButtonColor(b, 'white'));
 }
 
 function StartGame() {
@@ -60,9 +67,12 @@ function StartGame() {
   canClick = true;
 }
 
+function quit() {
+  window.location.href = quitLink;
+}
+
 function GameMenu(firstTime = false) {
-  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
-  menuGreeting.textContent = xmaxGreeting[randomGreeting];
+  NewRandomGreeting();
   menu.style.display = 'flex';
   if (!firstTime) {
     menuText.textContent = 'Du fick ' + points + " poäng.";
@@ -70,9 +80,20 @@ function GameMenu(firstTime = false) {
   canClick = false;
 }
 
+function NewRandomGreeting() {
+  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
+  while (menuGreeting.textContent === xmaxGreeting[randomGreeting]) {
+    // gör att det inte blir samma greeting 2 gånger på raken.
+    randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
+  }
+  menuGreeting.textContent = xmaxGreeting[randomGreeting];
+}
+//#endregion
+
 function DeathFunction() {
   SetHighScore();
   GameMenu();
+  TurnOffHoverEffect();
   randomizedQuestions = GetRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
@@ -90,6 +111,7 @@ function GetButtonWCorrectAnswer() {
 function AnswerQuestion(event) {
   if (canClick) {
     canClick = false;
+    TurnOffHoverEffect();
     if (event.target.textContent === currentQuestion.correctAnswer) {
       CorrectAnswer(event);
     }
@@ -153,6 +175,7 @@ function fillQuestion() {
   });
 }
 
+//#region Timer stuff
 function StartTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
@@ -182,7 +205,9 @@ function StartTimer() {
 function StopTimer() {
   clearInterval(myTimer);
 }
+//#endregion
 
+//#region Score stuff
 function SetHighScore() {
   let currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
   if (currentHighscore === null || points > currentHighscore) {
@@ -210,7 +235,7 @@ function UpdateScore(reset = false) {
 function comeBack(element) {
   element.style.opacity = 1;
 }
-
+//#endregion
 function UpdateHearts(reset = false) {
   if (reset === true) {
     lives = maxLives;
@@ -225,6 +250,7 @@ function UpdateHearts(reset = false) {
   }
 };
 
+//#region border test
 function BorderStyleSwap() {
   if (mainWhiteSquare.style.borderStyle === 'none') {
     mainWhiteSquare.style.borderStyle = 'double';
@@ -239,3 +265,4 @@ function BorderStyleSwap() {
     mainWhiteSquare.style.borderRadius = '0';
   }
 }
+//#endregion
