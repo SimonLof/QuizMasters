@@ -501,8 +501,8 @@ main {
 	.game{
 		width: 80vw;
 		max-width: 80vw;
-		height: 70vh;
-		margin: 1%;
+		height: 75vh;
+		margin: 10px;
     }
 	.question{
 	    height: 10vh;
@@ -521,6 +521,7 @@ main {
 		margin: auto;
 		padding: 20px 0;
 	}
+
 	.answer-buttons {
 		margin-right: 1vw;
 		margin-top: 3vh;
@@ -537,8 +538,8 @@ main {
 	.info-bar {
 		width: 40rem;
 		height: 4.1rem;
-		margin-top: 4vh;
-		margin-bottom: 1vh;
+		margin-top: 3vh;
+		margin-bottom: 2vh;
 		border: 2px pink solid;
 		text-align: center;
 		border-radius: 10px;
