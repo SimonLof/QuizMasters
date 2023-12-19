@@ -42,6 +42,7 @@ quitButton.addEventListener('click', quit);
 startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
 logo.addEventListener('click', BorderStyleSwap);
+menuGreeting.addEventListener('click', NewRandomGreeting);
 
 
 
