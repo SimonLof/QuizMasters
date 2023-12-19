@@ -16,7 +16,7 @@ const startButton = document.querySelector('.btn-start');
 const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
-
+const song = new Audio("sound/oe-ritschratsch.mp3");
 
 const linkList = ['https://www.youtube.com/watch?v=bP_aR4jDTWM', 'https://youtu.be/h6DNdop6pD8', 'https://www.youtube.com/watch?v=PfYnvDL0Qcw&t=28s', 'https://www.youtube.com/watch?v=i8ju_10NkGY', 'https://www.youtube.com/watch?v=6tR5aDGcXPg'];
 const quitLink = linkList[Math.floor(Math.random() * linkList.length)];
@@ -26,7 +26,10 @@ const timeToAnswer = 10;
 let lives = maxLives;
 let points = 0;
 let myTimer;
+let songDuration;
 let canClick = true;
+let currentlyPlayingSong = false;
+let canPlaySong = false;
 
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
@@ -35,6 +38,11 @@ const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe We
 
 //#region event listeners
 // Sätt alla event listeners här.
+song.addEventListener('loadeddata', () => {
+  songDuration = song.duration;
+});
+song.addEventListener('ended', () => { currentlyPlayingSong = true; });
+song.addEventListener('canplaythrough', () => { canPlaySong = true; console.log(song); });
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
@@ -221,6 +229,7 @@ function SetHighScore() {
 }
 
 function UpdateScore(reset = false) {
+
   if (reset) {
     points = 0;
   }
@@ -230,7 +239,18 @@ function UpdateScore(reset = false) {
     points++;
     SetHighScore();
   }
+  if (points > 20)
+    PlaySong();
   scoreBoard.innerHTML = points;
+}
+
+function PlaySong() {
+  if (canPlaySong && !currentlyPlayingSong) {
+    currentlyPlayingSong = true;
+    song.play();
+    console.log(song);
+    song.volume = 0.5;
+  }
 }
 
 function comeBack(element) {
