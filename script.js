@@ -17,7 +17,7 @@ const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
 
-const linkList = ['https://www.youtube.com/watch?v=bP_aR4jDTWM', 'https://youtu.be/h6DNdop6pD8', 'https://www.youtube.com/watch?v=PfYnvDL0Qcw&t=28s', 'https://www.youtube.com/watch?v=i8ju_10NkGY'];
+const linkList = ['https://www.youtube.com/watch?v=bP_aR4jDTWM', 'https://youtu.be/h6DNdop6pD8', 'https://www.youtube.com/watch?v=PfYnvDL0Qcw&t=28s', 'https://www.youtube.com/watch?v=i8ju_10NkGY', 'https://www.youtube.com/watch?v=6tR5aDGcXPg'];
 const quitLink = linkList[Math.floor(Math.random() * linkList.length)];
 const maxLives = 3;
 const timeToAnswer = 12;
