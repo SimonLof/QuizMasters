@@ -318,6 +318,7 @@ main {
   font-size: 2rem;
   text-shadow: 3px 3px 3px black;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .menu-btn {
@@ -453,7 +454,7 @@ main {
 
   main {
     max-width: 800px;
-    min-height: 690px;
+    min-height: 710px;
     max-height: 820px;
     width: 100%;
     height: 99%;
@@ -461,9 +462,17 @@ main {
     border: #27a300 solid 2px;
   }
 
+  .game {
+    margin-top: 0;
+  }
+
   .top-bar {
     margin-right: 1vw;
     margin-left: 1vw;
+  }
+
+  .btn {
+    height: 112px;
   }
 
   .quiz-box {
