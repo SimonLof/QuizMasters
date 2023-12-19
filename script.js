@@ -1,12 +1,11 @@
 import { GetRandomQuestions } from "./modules/questionModule.mjs";
 const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
-const timer = document.querySelector(".time"); // Timern
-const answerBox = document.querySelector(".answers"); // Lådan som håller svarsknapparna
 const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
 const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const highsoreBoard = document.querySelector('#hiscore-points');
+const highScoreStar = document.querySelector('#heyscore-star');
 const starBoard = document.querySelector("#star");
 const timeBar = document.querySelector(".time");
 const menu = document.querySelector('.menu-container');
@@ -16,13 +15,13 @@ const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 
 const maxLives = 3;
+const timeToAnswer = 10;
 
 let lives = maxLives;
 let points = 0;
 let myTimer;
 let canClick = true;
 
-let timeToAnswer = 10;
 let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
@@ -42,6 +41,7 @@ function quit() {
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
+  SetHighScore();
   GameMenu(true);
 }
 
@@ -66,18 +66,10 @@ function GameMenu(firstTime = false) {
 }
 
 function DeathFunction() {
-  SetHighSchore();
+  SetHighScore();
   GameMenu();
   randomizedQuestions = GetRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
-}
-
-function SetHighSchore() {
-  const currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
-  if (currentHighscore === null || points > currentHighscore) {
-    window.localStorage.setItem('highScore', JSON.stringify(points));
-  }
-  highsoreBoard.innerHTML = currentHighscore;
 }
 
 function GetButtonWCorrectAnswer() {
@@ -126,7 +118,6 @@ function NextQuestion() {
 function CorrectAnswer(event) {
   UpdateScore();
   updateButtonColor(event.target, 'green');
-  console.log('funkar');
   StopTimer();
 }
 
@@ -152,7 +143,6 @@ function fillQuestion() {
     let randInt = Math.floor(Math.random() * 4);
     while (answerButtons[randInt].textContent !== '') {
       randInt = Math.floor(Math.random() * 4);
-      console.log(randInt);
     }
     answerButtons[randInt].textContent = a;
   });
@@ -188,21 +178,32 @@ function StopTimer() {
   clearInterval(myTimer);
 }
 
+function SetHighScore() {
+  let currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
+  if (currentHighscore === null || points > currentHighscore) {
+    window.localStorage.setItem('highScore', JSON.stringify(points));
+    currentHighscore = points;
+    highScoreStar.style.opacity = 0;
+    setTimeout(() => { comeBack(highScoreStar); }, 250);
+  }
+  highsoreBoard.innerHTML = currentHighscore;
+}
+
 function UpdateScore(reset = false) {
   if (reset) {
     points = 0;
   }
   else {
     starBoard.style.opacity = 0;
-    setTimeout(comeBack, 250);
+    setTimeout(() => { comeBack(starBoard); }, 250);
     points++;
-    SetHighSchore();
+    SetHighScore();
   }
   scoreBoard.innerHTML = points;
 }
 
-function comeBack() {
-  starBoard.style.opacity = 1;
+function comeBack(element) {
+  element.style.opacity = 1;
 }
 
 function UpdateHearts(reset = false) {
