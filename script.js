@@ -17,7 +17,7 @@ const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
 
 const maxLives = 3;
-const timeToAnswer = 10;
+const timeToAnswer = 12;
 
 let lives = maxLives;
 let points = 0;
@@ -36,6 +36,7 @@ answerButtons.forEach(b => {
 quitButton.addEventListener('click', quit);
 startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
+menuGreeting.addEventListener('click', NewRandomGreeting);
 logo.addEventListener('click', BorderStyleSwap);
 
 function quit() {
@@ -58,13 +59,21 @@ function StartGame() {
 }
 
 function GameMenu(firstTime = false) {
-  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
-  menuGreeting.textContent = xmaxGreeting[randomGreeting];
+  NewRandomGreeting();
   menu.style.display = 'flex';
   if (!firstTime) {
     menuText.textContent = 'Du fick ' + points + " poäng.";
   }
   canClick = false;
+}
+
+function NewRandomGreeting() {
+  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
+  while (menuGreeting.textContent === xmaxGreeting[randomGreeting]) {
+    // gör att det inte blir samma greeting 2 gånger på raken.
+    randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
+  }
+  menuGreeting.textContent = xmaxGreeting[randomGreeting];
 }
 
 function DeathFunction() {
