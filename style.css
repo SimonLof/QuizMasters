@@ -398,7 +398,7 @@ main {
 }
 
  /* Mellansegmentet */
-@media (orientation: portrait) and (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 767px) {
   body {
     display: flex;
     justify-content: center;
