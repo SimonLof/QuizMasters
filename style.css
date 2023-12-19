@@ -396,6 +396,82 @@ main {
   }
 }
 
+ /* Mellansegmentet */
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main {
+    max-width: 90%;
+    min-width: 90%;
+    height: 95%;
+    border-radius: 3%;
+    border: #27a300 solid 2px;
+    background-color: #ffebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .game {
+    height: 100%;
+    border-radius: 3%;
+    display:flex;
+    flex-direction: column;
+  }
+  .top-bar {
+    margin-right: 1vw;
+    margin-left: 1vw;
+    }
+
+  .quiz-box {
+    width: 95%;
+    margin: 1%;
+    padding: 2%;
+  }
+
+  .question {
+    height: 75%;
+  }
+  .answer-buttons {
+    margin-right: 1vw;
+  }
+
+  .btn {
+    background-color: var(--button-bgcolor);
+    color: #222;
+    font-weight: 400;
+    font-size: 1rem;
+    border: 1px solid #222;
+    padding: 2rem;
+    margin: 2%;
+    text-align: center;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    box-shadow: 0 0 6px 0.5px;
+    transition: all 0.4s;
+  }
+  
+
+  .menu-container {
+    height: 200px;
+    width: 400px;
+  }
+  
+  .info-bar {
+    width: 95%;
+    height: 1.2rem;
+  }
+
+  .links ul {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
 /* surfplatta */
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
