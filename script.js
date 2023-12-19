@@ -37,6 +37,7 @@ const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe We
 //#endregion
 
 //#region event listeners
+
 // Sätt alla event listeners här.
 song.addEventListener('loadeddata', () => {
   songDuration = song.duration;
@@ -51,8 +52,7 @@ startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
 logo.addEventListener('click', BorderStyleSwap);
 menuGreeting.addEventListener('click', NewRandomGreeting);
-
-
+//#endregion
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
@@ -61,7 +61,6 @@ function __main() {
   SetHighScore();
   GameMenu(true);
 }
-
 
 //#region Menu stuff
 function TurnOffHoverEffect() {
@@ -100,6 +99,7 @@ function NewRandomGreeting() {
 //#endregion
 
 function DeathFunction() {
+  // reset the game
   SetHighScore();
   GameMenu();
   TurnOffHoverEffect();
@@ -107,6 +107,7 @@ function DeathFunction() {
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
 
+//#region Question stuff
 function GetButtonWCorrectAnswer() {
   let result;
   answerButtons.forEach(b => {
@@ -116,6 +117,7 @@ function GetButtonWCorrectAnswer() {
   });
   return result;
 }
+
 
 function AnswerQuestion(event) {
   if (canClick) {
@@ -183,6 +185,7 @@ function fillQuestion() {
     answerButtons[randInt].textContent = a;
   });
 }
+//#endregion
 
 //#region Timer stuff
 function StartTimer() {
@@ -229,7 +232,6 @@ function SetHighScore() {
 }
 
 function UpdateScore(reset = false) {
-
   if (reset) {
     points = 0;
   }
@@ -257,6 +259,7 @@ function comeBack(element) {
   element.style.opacity = 1;
 }
 //#endregion
+
 function UpdateHearts(reset = false) {
   if (reset === true) {
     lives = maxLives;
@@ -273,7 +276,7 @@ function UpdateHearts(reset = false) {
 
 //#region border test
 function BorderStyleSwap() {
-  if (mainWhiteSquare.style.borderStyle === 'none') {
+  if (mainWhiteSquare.style.borderStyle === 'solid') {
     mainWhiteSquare.style.borderStyle = 'double';
     mainWhiteSquare.style.borderColor = 'green';
     mainWhiteSquare.style.borderWidth = '2px';
@@ -281,7 +284,8 @@ function BorderStyleSwap() {
     console.log('yes');
   } else {
     console.log('no');
-    mainWhiteSquare.style.borderStyle = 'none';
+    mainWhiteSquare.style.borderStyle = 'solid';
+    mainWhiteSquare.style.borderColor = 'white';
     mainWhiteSquare.style.borderWidth = '2px';
     mainWhiteSquare.style.borderRadius = '0';
   }
