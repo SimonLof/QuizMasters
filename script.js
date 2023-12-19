@@ -1,6 +1,7 @@
 //#region Variabler
 import { GetRandomQuestions } from "./modules/questionModule.mjs";
 const mainWhiteSquare = document.querySelector('main');
+const topBar = document.querySelector('.top-bar');
 const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
 const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
@@ -16,17 +17,21 @@ const startButton = document.querySelector('.btn-start');
 const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
+const lifeBox = document.querySelector('#life-container');
 const song = new Audio("sound/oe-ritschratsch.mp3");
+const faces = document.querySelector('#face-life');
 
+const faceList = ['./images/faces/fullhealth.png', './images/faces/1dmg.png', './images/faces/2dmg.png', './images/faces/ded.png'];
 const linkList = ['https://www.youtube.com/watch?v=bP_aR4jDTWM', 'https://youtu.be/h6DNdop6pD8', 'https://www.youtube.com/watch?v=PfYnvDL0Qcw&t=28s', 'https://www.youtube.com/watch?v=i8ju_10NkGY', 'https://www.youtube.com/watch?v=6tR5aDGcXPg'];
 const quitLink = linkList[Math.floor(Math.random() * linkList.length)];
 const maxLives = 3;
 const timeToAnswer = 10;
 
+let menuState = true;
+let heartLives = true;
 let lives = maxLives;
 let points = 0;
 let myTimer;
-let songDuration;
 let canClick = true;
 let currentlyPlayingSong = false;
 let canPlaySong = false;
@@ -39,8 +44,19 @@ const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe We
 //#region event listeners
 
 // Sätt alla event listeners här.
-song.addEventListener('loadeddata', () => {
-  songDuration = song.duration;
+topBar.addEventListener('click', () => {
+  if (menuState) {
+    heartLives = !heartLives;
+    if (heartLives) {
+      faces.style.display = 'none';
+      heartShapedBox.forEach(h => h.style.display = 'inline');
+      console.log(heartShapedBox);
+    } else {
+      heartShapedBox.forEach(h => h.style.display = 'none');
+      faces.style.display = 'inline';
+      faces.src = `${faceList[faceList.length - 1 - lives]}`;
+    }
+  }
 });
 song.addEventListener('ended', () => { currentlyPlayingSong = true; });
 song.addEventListener('canplaythrough', () => { canPlaySong = true; console.log(song); });
@@ -67,25 +83,27 @@ function TurnOffHoverEffect() {
   answerButtons.forEach(b => updateButtonColor(b, 'white'));
 }
 
-function StartGame() {
-  menu.style.display = 'none';
-  UpdateHearts(true);
-  UpdateScore(true);
-  fillQuestion();
-  canClick = true;
-}
-
 function quit() {
   window.location.href = quitLink;
 }
 
 function GameMenu(firstTime = false) {
+  menuState = true;
   NewRandomGreeting();
   menu.style.display = 'flex';
   if (!firstTime) {
     menuText.textContent = 'Du fick ' + points + " poäng.";
   }
   canClick = false;
+}
+
+function StartGame() {
+  menu.style.display = 'none';
+  UpdateHearts(true);
+  UpdateScore(true);
+  fillQuestion();
+  canClick = true;
+  menuState = false;
 }
 
 function NewRandomGreeting() {
@@ -263,13 +281,21 @@ function comeBack(element) {
 function UpdateHearts(reset = false) {
   if (reset === true) {
     lives = maxLives;
-    heartShapedBox.forEach((element) => {
-      element.className = "red";
-    });
+    if (heartLives) {
+      heartShapedBox.forEach((element) => {
+        element.className = "red";
+      });
+    } else {
+      lifeBox.innerHTML = `<img src="${faceList[faceList.length - 1 - lives]}">`;
+    }
   } else {
     lives--;
-    for (let i = 0; i < 3 - lives; i++) {
-      heartShapedBox[i].className = "gray";
+    if (heartLives) {
+      for (let i = 0; i < 3 - lives; i++) {
+        heartShapedBox[i].className = "gray";
+      }
+    } else {
+      lifeBox.innerHTML = `<img src="${faceList[faceList.length - 1 - lives]}">`;
     }
   }
 };
