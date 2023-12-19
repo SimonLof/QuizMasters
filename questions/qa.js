@@ -170,5 +170,25 @@ export default
       "question": "Who's number one?",
       "answers": ["Elon Musk", "Bill Gates", "Steve Jobs", "The Quiz Masters"],
       "correctAnswer": "The Quiz Masters"
+    },
+    {
+      "question": "Svenskarna är det folk som äter mest godis i hela världen, inte minst under julen. Men hur mycket totalt per år och person?",
+      "answers": ["10 kg", "6,7 kg", "15 kg", "47kg"],
+      "correctAnswer": "15 kg"
+    },
+    {
+      "question": "'Feast of the Seven Fishes' firas på julaftonen i USA av en viss del av befolkningen:",
+      "answers": ["Afro-amerikaner", "Puertorikaner", "Kreoler", "Italiensk-amerikaner"],
+      "correctAnswer": "Italiensk-amerikaner"
+    },
+    {
+      "question": "Vad säger Jultomten i Futurama strax innan hans huvud sprängs?",
+      "answers": ["All your bells are jingles to us.", "Happy Kwanza!", "Does not compute.", "Follow the white rabbit."],
+      "correctAnswer": "Does not compute."
+    },
+    {
+      "question": "'Everytime a bell rings, an angel gets his ...",
+      "answers": ["...things.'", "...wings.'", "...webdings.'", "...kings.'"],
+      "correctAnswer": "...wings.'"
     }
   ];
