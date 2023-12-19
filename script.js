@@ -1,4 +1,3 @@
-//#region Variables
 import { GetRandomQuestions } from "./modules/questionModule.mjs";
 const mainWhiteSquare = document.querySelector('main');
 const game = document.querySelector(".game"); // Hela gamerutan
@@ -17,10 +16,11 @@ const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
 
+
 const linkList = ['https://www.youtube.com/watch?v=bP_aR4jDTWM', 'https://youtu.be/h6DNdop6pD8', 'https://www.youtube.com/watch?v=PfYnvDL0Qcw&t=28s', 'https://www.youtube.com/watch?v=i8ju_10NkGY', 'https://www.youtube.com/watch?v=6tR5aDGcXPg'];
 const quitLink = linkList[Math.floor(Math.random() * linkList.length)];
 const maxLives = 3;
-const timeToAnswer = 12;
+const timeToAnswer = 10;
 
 let lives = maxLives;
 let points = 0;
@@ -31,31 +31,25 @@ let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
 const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe Weihnachten!', 'Buon Natale!', 'Feliz Natal!', 'Crăciun Fericit!', 'Glædelig Jul!', 'Hyvää Joulua!', 'Gleðileg Jól!', 'Wesołych Świąt!', 'Vrolijk Kerstfeest!', 'Sretan Božić!', 'Veselé Vánoce!', 'Felicem Natalem Christi!', 'Nollaig Shona!', 'Merry Christmas!', 'Happy Holidays!'];
-//#endregion
 
-
-//#region Event Listeners
+// Sätt alla event listeners här.
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
 quitButton.addEventListener('click', quit);
 startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
-menuGreeting.addEventListener('click', NewRandomGreeting);
 logo.addEventListener('click', BorderStyleSwap);
-//#endregion
+
+function quit() {
+  window.location.href = 'https://nackademin.se';
+}
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
-  TurnOffHoverEffect();
   SetHighScore();
   GameMenu(true);
-}
-
-//#region Menu stuff
-function quit() {
-  window.location.href = quitLink;
 }
 
 function StartGame() {
@@ -67,7 +61,8 @@ function StartGame() {
 }
 
 function GameMenu(firstTime = false) {
-  NewRandomGreeting();
+  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
+  menuGreeting.textContent = xmaxGreeting[randomGreeting];
   menu.style.display = 'flex';
   if (!firstTime) {
     menuText.textContent = 'Du fick ' + points + " poäng.";
@@ -75,28 +70,11 @@ function GameMenu(firstTime = false) {
   canClick = false;
 }
 
-function NewRandomGreeting() {
-  let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
-  while (menuGreeting.textContent === xmaxGreeting[randomGreeting]) {
-    // gör att det inte blir samma greeting 2 gånger på raken.
-    randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
-  }
-  menuGreeting.textContent = xmaxGreeting[randomGreeting];
-}
-//#endregion
-
-
 function DeathFunction() {
-  // resets the game
   SetHighScore();
   GameMenu();
-  TurnOffHoverEffect();
   randomizedQuestions = GetRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
-}
-
-function TurnOffHoverEffect() {
-  answerButtons.forEach(b => updateButtonColor(b, 'white'));
 }
 
 function GetButtonWCorrectAnswer() {
@@ -112,7 +90,6 @@ function GetButtonWCorrectAnswer() {
 function AnswerQuestion(event) {
   if (canClick) {
     canClick = false;
-    TurnOffHoverEffect();
     if (event.target.textContent === currentQuestion.correctAnswer) {
       CorrectAnswer(event);
     }
@@ -176,7 +153,6 @@ function fillQuestion() {
   });
 }
 
-//#region
 function StartTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
@@ -191,7 +167,6 @@ function StartTimer() {
     timeBar.style.width = `${newValue}%`;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
-      TurnOffHoverEffect();
       canClick = false;
       WrongAnswer();
       if (lives > 0) {
@@ -208,7 +183,6 @@ function StopTimer() {
   clearInterval(myTimer);
 }
 
-//#region Score stuff
 function SetHighScore() {
   let currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
   if (currentHighscore === null || points > currentHighscore) {
@@ -236,7 +210,6 @@ function UpdateScore(reset = false) {
 function comeBack(element) {
   element.style.opacity = 1;
 }
-//#endregion
 
 function UpdateHearts(reset = false) {
   if (reset === true) {
@@ -252,7 +225,6 @@ function UpdateHearts(reset = false) {
   }
 };
 
-//#region testing borders
 function BorderStyleSwap() {
   if (mainWhiteSquare.style.borderStyle === 'none') {
     mainWhiteSquare.style.borderStyle = 'double';
@@ -267,4 +239,3 @@ function BorderStyleSwap() {
     mainWhiteSquare.style.borderRadius = '0';
   }
 }
-//#endregion

@@ -2,7 +2,7 @@ export default
 
   [
     {
-      "question": "Vilken dag firas julen i Sverige?",
+      "question": "Vilken dag firas julen?",
       "answers": ["24 december", "25 december", "26 december", "31 december"],
       "correctAnswer": "24 december"
     },
@@ -115,55 +115,5 @@ export default
       "question": "Vad heter kryddan som man dekorerar apelsiner med till jul?",
       "answers": ["Kardemumma", "Anis", "Kanel", "Kryddnejlika"],
       "correctAnswer": "Kryddnejlika"
-    },
-    {
-      "question": "Vilken författare skrev boken 'How The Grinch Stole Christmas'?",
-      "answers": ["George Orwell", "Dr Seuss", "Philip K Dick", "Franz Kafka"],
-      "correctAnswer": "Dr Seuss"
-    },
-    {
-      "question": "Vilken skådespelare har inte spelat Grinchen på film?",
-      "answers": ["Benedict Cumberbatch", "Jim Carrey", "Billy Bob Thornton", "Boris Karloff"],
-      "correctAnswer": "Billy Bob Thornton"
-    },
-    {
-      "question": "Vem har skrivit 'Sagan om Karl-Bertil Jonssons julafton'",
-      "answers": ["Hans Alfredsson", "Tage Danielsson", "Astrid Lindgren", "Barbro Lindgren"],
-      "correctAnswer": "Tage Danielsson"
-    },
-    {
-      "question": "I Nederländerna förekommer en lite ovanlig figur i julfirandet. Vad heter han?",
-      "answers": ["Tannhäuser", "Weiss Wilders", "Zwarte Piet", "Geert Feijs"],
-      "correctAnswer": "Zwarte Piet"
-    },
-    {
-      "question": "Innan den moderna Tomten slog igenom i Sverige delades klapparna ut av vem?",
-      "answers": ["Jul-Häxan", "Jul-Jesus", "Jul-Näcken", "Jul-Bocken"],
-      "correctAnswer": "Jul-Bocken"
-    },
-    {
-      "question": "Vilken krydda används sällan i pepparkakor?",
-      "answers": ["Kanel", "Ingefära", "Nejlika", "Svartpeppar"],
-      "correctAnswer": "Svartpeppar"
-    },
-    {
-      "question": "Vad är en 'PARTRIDGE in a pear tree' egentligen?",
-      "answers": ["Turturduva", "Tjäder", "Rapphöna", "Påfågel"],
-      "correctAnswer": "Rapphöna"
-    },
-    {
-      "question": "Vilken chokladask är egentligen populärast?",
-      "answers": ["Paradis", "Aladdin", "After Eight", "Merci"],
-      "correctAnswer": "Aladdin"
-    },
-    {
-      "question": "Efter hur många dagar städas julen traditionellt ut?",
-      "answers": ["13", "21", "20", "14"],
-      "correctAnswer": "20"
-    },
-    {
-      "question": "Trettondagsafton är en del av julhögtiden, men också en teaterpjäs. Av vem?",
-      "answers": ["Henrik Ibsen", "Samuel Beckett", "William Shakespeare", "August Strindberg"],
-      "correctAnswer": "William Shakespeare"
     }
   ];
