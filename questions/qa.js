@@ -190,5 +190,25 @@ export default
       "question": "'Everytime a bell rings, an angel gets his ...",
       "answers": ["...things.'", "...wings.'", "...webdings.'", "...kings.'"],
       "correctAnswer": "...wings.'"
+    },
+    {
+      "question": "Vilket år dog Sankt Nikolaos av Myra?",
+      "answers": ["343 e.Kr.", "826 e.Kr.", "1477 e.Kr.", "1146 e.Kr."],
+      "correctAnswer": "343 e.Kr."
+    },
+    {
+      "question": "Vem var inte en av de tre vise männen?",
+      "answers": ["Melchior", "Caspar", "Balthasar", "Zarathustra"],
+      "correctAnswer": "Zarathustra"
+    },
+    {
+      "question": "Var ligger staden Betlehem, där Jesus sägs ha fötts?",
+      "answers": ["Jordanien", "Palestina", "Libanon", "Israel"],
+      "correctAnswer": "Palestina"
+    },
+    {
+      "question": "I vilken tv-serie förkommer Mr Hankey, The Christmas Poo?",
+      "answers": ["The Simpsons", "Rick & Morty", "Beavis & Butthead", "South Park"],
+      "correctAnswer": "South Park"
     }
   ];
