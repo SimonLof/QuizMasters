@@ -42,7 +42,6 @@ const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe We
 //#endregion
 
 //#region event listeners
-
 // Sätt alla event listeners här.
 topBar.addEventListener('click', () => {
   if (menuState) {
@@ -286,7 +285,7 @@ function UpdateHearts(reset = false) {
         element.className = "red";
       });
     } else {
-      lifeBox.innerHTML = `<img src="${faceList[faceList.length - 1 - lives]}">`;
+      faces.src = `${faceList[faceList.length - 1 - lives]}`;;
     }
   } else {
     lives--;
@@ -295,7 +294,7 @@ function UpdateHearts(reset = false) {
         heartShapedBox[i].className = "gray";
       }
     } else {
-      lifeBox.innerHTML = `<img src="${faceList[faceList.length - 1 - lives]}">`;
+      faces.src = `${faceList[faceList.length - 1 - lives]}`;;
     }
   }
 };
