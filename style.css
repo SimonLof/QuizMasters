@@ -403,6 +403,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 750px;
   }
 
   main {
@@ -416,6 +417,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
   }
 
   .game {
@@ -459,14 +461,16 @@ main {
   }
   
   .info-bar {
-    width: 95%;
+    width: 90%;
     height: 1.2rem;
-    align-self: flex-end;
+    margin-left: 3%;
+    margin-right: 3%;
   }
 
   .links ul {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: nowrap;
   }
 }
 
