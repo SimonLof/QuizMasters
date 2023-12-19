@@ -47,6 +47,7 @@ logo.addEventListener('click', BorderStyleSwap);
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
+  TurnOffHoverEffect();
   SetHighScore();
   GameMenu(true);
 }
@@ -88,8 +89,13 @@ function DeathFunction() {
   // resets the game
   SetHighScore();
   GameMenu();
+  TurnOffHoverEffect();
   randomizedQuestions = GetRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
+}
+
+function TurnOffHoverEffect() {
+  answerButtons.forEach(b => updateButtonColor(b, 'white'));
 }
 
 function GetButtonWCorrectAnswer() {
@@ -105,6 +111,7 @@ function GetButtonWCorrectAnswer() {
 function AnswerQuestion(event) {
   if (canClick) {
     canClick = false;
+    TurnOffHoverEffect();
     if (event.target.textContent === currentQuestion.correctAnswer) {
       CorrectAnswer(event);
     }
@@ -183,6 +190,7 @@ function StartTimer() {
     timeBar.style.width = `${newValue}%`;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
+      TurnOffHoverEffect();
       canClick = false;
       WrongAnswer();
       if (lives > 0) {
