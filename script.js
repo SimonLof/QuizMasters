@@ -1,4 +1,5 @@
 import { GetRandomQuestions } from "./modules/questionModule.mjs";
+const mainWhiteSquare = document.querySelector('main');
 const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
 const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
@@ -13,6 +14,7 @@ const quitButton = document.querySelector('.btn-quit');
 const startButton = document.querySelector('.btn-start');
 const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
+const logo = document.querySelector('#logo');
 
 const maxLives = 3;
 const timeToAnswer = 10;
@@ -33,6 +35,8 @@ answerButtons.forEach(b => {
 });
 quitButton.addEventListener('click', quit);
 startButton.addEventListener('click', StartGame);
+// Tryck på loggan för att testa border
+logo.addEventListener('click', BorderStyleSwap);
 
 function quit() {
   window.location.href = 'https://nackademin.se';
@@ -44,8 +48,6 @@ function __main() {
   SetHighScore();
   GameMenu(true);
 }
-
-
 
 function StartGame() {
   menu.style.display = 'none';
@@ -219,3 +221,18 @@ function UpdateHearts(reset = false) {
     }
   }
 };
+
+function BorderStyleSwap() {
+  if (mainWhiteSquare.style.borderStyle === 'none') {
+    mainWhiteSquare.style.borderStyle = 'double';
+    mainWhiteSquare.style.borderColor = 'green';
+    mainWhiteSquare.style.borderWidth = '2px';
+    mainWhiteSquare.style.borderRadius = '5%';
+    console.log('yes');
+  } else {
+    console.log('no');
+    mainWhiteSquare.style.borderStyle = 'none';
+    mainWhiteSquare.style.borderWidth = '2px';
+    mainWhiteSquare.style.borderRadius = '0';
+  }
+}
