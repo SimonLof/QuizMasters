@@ -397,6 +397,145 @@ main {
   }
 }
 
+ /* Mellansegmentet */
+@media (orientation: portrait) and (min-width: 481px) and (max-width: 767px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main {
+    max-width: 90%;
+    min-width: 90%;
+    min-height: 95%;
+    max-height: 95%;
+    border-radius: 3%;
+    border: #27a300 solid 2px;
+    background-color: #ffebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .game {
+    height: 100%;
+    border-radius: 3%;
+    display:flex;
+    flex-direction: column;
+  }
+  .top-bar {
+    margin-right: 3%;
+    margin-left: 3%;
+    }
+
+  .quiz-box {
+    width: 95%;
+    margin: 1%;
+    padding: 2%;
+  }
+
+  /* .question {
+    min-height: 55%;
+    max-height: 55%;
+  } */
+  .answer-buttons {
+    margin-right: 2%;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-template-rows: 49% 49%;
+    gap: 2%;
+  }
+
+  .btn {
+    font-size: 120%;
+    min-height: 140px;
+    max-height: 140px;
+  }
+
+  .menu-container {
+    height: 200px;
+    width: 400px;
+  }
+  
+  .info-bar {
+    width: 95%;
+    height: 1.2rem;
+  }
+
+  .links ul {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main {
+    max-width: 90%;
+    min-width: 90%;
+    min-height: 95%;
+    max-height: 95%;
+    border-radius: 3%;
+    border: #27a300 solid 2px;
+    background-color: #ffebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .game {
+    height: 100%;
+    border-radius: 3%;
+    display:flex;
+    flex-direction: column;
+  }
+  .top-bar {
+    margin-right: 3%;
+    margin-left: 3%;
+    }
+
+  .quiz-box {
+    width: 95%;
+    margin: 1%;
+    padding: 2%;
+  }
+
+  .answer-buttons {
+    margin-right: 2%;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-template-rows: 49% 49%;
+    gap: 2%;
+  }
+
+  .btn {
+    font-size: 120%;
+    min-height: 140px;
+    max-height: 140px;
+  }
+
+  .menu-container {
+    height: 200px;
+    width: 400px;
+  }
+  
+  .info-bar {
+    width: 95%;
+    height: 1.2rem;
+  }
+
+  .links ul {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
 /* surfplatta */
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
