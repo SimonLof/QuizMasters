@@ -1,3 +1,4 @@
+//#region Variables
 import { GetRandomQuestions } from "./modules/questionModule.mjs";
 const mainWhiteSquare = document.querySelector('main');
 const game = document.querySelector(".game"); // Hela gamerutan
@@ -16,6 +17,7 @@ const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
 
+const quitLink = 'https://nackademin.se';
 const maxLives = 3;
 const timeToAnswer = 12;
 
@@ -28,8 +30,10 @@ let randomizedQuestions = GetRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 
 const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe Weihnachten!', 'Buon Natale!', 'Feliz Natal!', 'Crăciun Fericit!', 'Glædelig Jul!', 'Hyvää Joulua!', 'Gleðileg Jól!', 'Wesołych Świąt!', 'Vrolijk Kerstfeest!', 'Sretan Božić!', 'Veselé Vánoce!', 'Felicem Natalem Christi!', 'Nollaig Shona!', 'Merry Christmas!', 'Happy Holidays!'];
+//#endregion
 
-// Sätt alla event listeners här.
+
+//#region Event Listeners
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
@@ -38,16 +42,18 @@ startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
 menuGreeting.addEventListener('click', NewRandomGreeting);
 logo.addEventListener('click', BorderStyleSwap);
-
-function quit() {
-  window.location.href = 'https://nackademin.se';
-}
+//#endregion
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
   SetHighScore();
   GameMenu(true);
+}
+
+//#region Menu stuff
+function quit() {
+  window.location.href = quitLink;
 }
 
 function StartGame() {
@@ -75,8 +81,11 @@ function NewRandomGreeting() {
   }
   menuGreeting.textContent = xmaxGreeting[randomGreeting];
 }
+//#endregion
+
 
 function DeathFunction() {
+  // resets the game
   SetHighScore();
   GameMenu();
   randomizedQuestions = GetRandomQuestions();
@@ -159,6 +168,7 @@ function fillQuestion() {
   });
 }
 
+//#region
 function StartTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
@@ -189,6 +199,7 @@ function StopTimer() {
   clearInterval(myTimer);
 }
 
+//#region Score stuff
 function SetHighScore() {
   let currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
   if (currentHighscore === null || points > currentHighscore) {
@@ -216,6 +227,7 @@ function UpdateScore(reset = false) {
 function comeBack(element) {
   element.style.opacity = 1;
 }
+//#endregion
 
 function UpdateHearts(reset = false) {
   if (reset === true) {
@@ -231,6 +243,7 @@ function UpdateHearts(reset = false) {
   }
 };
 
+//#region testing borders
 function BorderStyleSwap() {
   if (mainWhiteSquare.style.borderStyle === 'none') {
     mainWhiteSquare.style.borderStyle = 'double';
@@ -245,3 +258,4 @@ function BorderStyleSwap() {
     mainWhiteSquare.style.borderRadius = '0';
   }
 }
+//#endregion
