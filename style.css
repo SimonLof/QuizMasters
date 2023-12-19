@@ -383,8 +383,9 @@ main {
   }
 
   .menu-container {
-    height: 50vh;
-    top: 25vh
+    height: 400px;
+    width: 250px;
+    top: 100px
   }
 
   .menu-btn {
@@ -470,6 +471,10 @@ main {
     width: 400px;
   }
 
+  .menu-btn {
+    height: 20%;
+  }
+
   .info-bar {
     width: 90%;
     height: 1.2rem;
@@ -485,84 +490,102 @@ main {
   }
 }
 
-
 /* surfplatta */
 @media (min-width: 768px) and (max-width: 1024px) {
-	  main {
-		width:90%;
-		height: 85%;
-		margin: 5rem 1rem;
-		display: flex;
-		flex-direction: column;
-		background-color: white;
-		justify-content: center;
-		align-items: center;
-	  }
-	.game{
-		width: 80vw;
-		max-width: 80vw;
-		height: 75vh;
-		margin: 10px;
-    }
-	.question{
-	    height: 10vh;
-		max-height: 100px;
-		min-height: 100px;
-		width: 70.5vw;
-		max-width: 80vw;	  
-	}  
-	.top-bar {
-		margin-right: 1vw;
-		margin-left: 1vw;
-	}
-	.quiz-box {
-		width: 90%;
-		height: 90%;
-		margin: auto;
-		padding: 20px 0;
-	}
+  main {
+    width: 90%;
+    height: 85%;
+    min-height: 780px;
+    margin: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+  }
 
-	.answer-buttons {
-		margin-right: 1vw;
-		margin-top: 3vh;
-	}
-	.menu-container {
-		height: 20vh;
-		width: 40vw;
-		top: 35vh
-    }
-	.menu-btn{
-		height: 20%;
+  .game {
+    width: 80vw;
+    max-width: 80vw;
+    height: 80%;
+    min-height: 650px;
+    margin: 10px;
+    margin-top: 3rem;
+  }
 
-	}
-	.info-bar {
-		width: 40rem;
-		height: 4.1rem;
-		margin-top: 3vh;
-		margin-bottom: 2vh;
-		border: 2px pink solid;
-		text-align: center;
-		border-radius: 10px;
-		background-color: #fdfdf0;
-	  }
-	  .links ul{
-		display:flex;
-		flex-direction: row;
-		justify-content: space-around;
-		align-content: stretch;
-		margin-top: 1.5vh;
-	  }
-	  .links a{
-		font-size: 1.2rem;
-	  }
-	.btn{
-		font-size: 18px;
-		/* padding: 50px; */
-		height: 15vh;
-	}
-	.time{
-		margin-top: 3vh;
-	}
+  .question {
+    height: 100%;
+    width: 70.5vw;
+    max-width: 80vw;
+  }
+
+  .top-bar {
+    margin-right: 1vw;
+    margin-left: 1vw;
+  }
+
+  .quiz-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    padding: 20px 0;
+  }
+
+  .answer-buttons {
+    margin-right: 1vw;
+    margin-top: 30px;
+    min-height: 260px;
+  }
+
+  .menu-container {
+    height: 200px;
+    width: 400px;
+    top: 300px
+  }
+
+  .menu-btn {
+    height: 20%;
+  }
+
+  .info-bar {
+    width: 80%;
+    min-height: 3.5rem;
+    max-height: 3.5rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 2px pink solid;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fdfdf0;
+  }
+
+  .links ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    margin: 1rem;
+  }
+
+  .links a {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    height: 100px;
+    margin-top: -5px;
+  }
+
+  .time {
+    margin-top: 2rem;
+  }
 }
 
 @media screen and (min-width: 1025px) {
@@ -593,6 +616,7 @@ main {
 
   .btn {
     height: 112px;
+    font-size: 1.2rem;
   }
 
   .quiz-box {
@@ -609,6 +633,10 @@ main {
   .menu-container {
     height: 200px;
     width: 400px;
+  }
+
+  .menu-btn {
+    height: 20%;
   }
 }
 
