@@ -4,8 +4,6 @@ const mainWhiteSquare = document.querySelector('main');
 const topBar = document.querySelector('.top-bar');
 const game = document.querySelector(".game"); // Hela gamerutan
 const questionText = document.querySelector(".question"); // Frågans text
-const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
-const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
 const scoreBoard = document.querySelector("#points"); // poängsiffrans behållare
 const highsoreBoard = document.querySelector('#hiscore-points');
 const highScoreStar = document.querySelector('#heyscore-star');
@@ -18,8 +16,10 @@ const menuText = document.querySelector('.menu-text');
 const menuGreeting = document.querySelector('.menu-greeting');
 const logo = document.querySelector('#logo');
 const lifeBox = document.querySelector('#life-container');
-const song = new Audio("sound/oe-ritschratsch.mp3");
 const faces = document.querySelector('#face-life');
+const answerButtons = document.querySelectorAll(".btn"); // alla svarsknappar
+const heartShapedBox = document.querySelectorAll(".hearts"); // alla hjärtan
+const song = new Audio("sound/oe-ritschratsch.mp3");
 
 const faceList = ['./images/faces/fullhealth.png', './images/faces/1dmg.png', './images/faces/2dmg.png', './images/faces/ded.png'];
 const linkList = ['https://www.youtube.com/watch?v=bP_aR4jDTWM', 'https://youtu.be/h6DNdop6pD8', 'https://www.youtube.com/watch?v=PfYnvDL0Qcw&t=28s', 'https://www.youtube.com/watch?v=i8ju_10NkGY', 'https://www.youtube.com/watch?v=6tR5aDGcXPg'];
@@ -56,7 +56,7 @@ topBar.addEventListener('click', () => {
     }
   }
 });
-song.addEventListener('ended', () => { currentlyPlayingSong = true; });
+song.addEventListener('ended', () => { currentlyPlayingSong = false; });
 song.addEventListener('canplaythrough', () => { canPlaySong = true; });
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
@@ -134,7 +134,6 @@ function GetButtonWCorrectAnswer() {
   return result;
 }
 
-
 function AnswerQuestion(event) {
   if (canClick) {
     canClick = false;
@@ -155,8 +154,8 @@ function AnswerQuestion(event) {
 
 function NextQuestion() {
   randomizedQuestions.pop();
-  currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
   if (randomizedQuestions.length > 0) {
+    currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
     setTimeout(() => {
       fillQuestion();
       canClick = true;
@@ -201,7 +200,6 @@ function fillQuestion() {
     }
     answerButtons[randInt].textContent = a;
   });
-
   StartTimer();
 }
 //#endregion
@@ -256,7 +254,9 @@ function UpdateScore(reset = false) {
   }
   else {
     starBoard.style.opacity = 0;
-    setTimeout(() => { comeBack(starBoard); }, 250);
+    setTimeout(() => {
+      comeBack(starBoard);
+    }, 250);
     points++;
     SetHighScore();
   }
