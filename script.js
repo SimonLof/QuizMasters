@@ -49,7 +49,6 @@ topBar.addEventListener('click', () => {
     if (heartLives) {
       faces.style.display = 'none';
       heartShapedBox.forEach(h => h.style.display = 'inline');
-      console.log(heartShapedBox);
     } else {
       heartShapedBox.forEach(h => h.style.display = 'none');
       faces.style.display = 'inline';
@@ -58,7 +57,7 @@ topBar.addEventListener('click', () => {
   }
 });
 song.addEventListener('ended', () => { currentlyPlayingSong = true; });
-song.addEventListener('canplaythrough', () => { canPlaySong = true; console.log(song); });
+song.addEventListener('canplaythrough', () => { canPlaySong = true; });
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
@@ -191,9 +190,10 @@ function updateButtonColor(button, bgColor = '') {
 
 function fillQuestion() {
   answerButtons.forEach(b => updateButtonColor(b, ''));
-  StartTimer();
-  questionText.textContent = currentQuestion.question;
   answerButtons.forEach(b => b.textContent = '');
+
+  questionText.textContent = currentQuestion.question;
+
   currentQuestion.answers.forEach(a => {
     let randInt = Math.floor(Math.random() * 4);
     while (answerButtons[randInt].textContent !== '') {
@@ -201,6 +201,8 @@ function fillQuestion() {
     }
     answerButtons[randInt].textContent = a;
   });
+
+  StartTimer();
 }
 //#endregion
 
@@ -267,7 +269,6 @@ function PlaySong() {
   if (canPlaySong && !currentlyPlayingSong) {
     currentlyPlayingSong = true;
     song.play();
-    console.log(song);
     song.volume = 0.5;
   }
 }
@@ -306,9 +307,7 @@ function BorderStyleSwap() {
     mainWhiteSquare.style.borderColor = 'green';
     mainWhiteSquare.style.borderWidth = '2px';
     mainWhiteSquare.style.borderRadius = '5%';
-    console.log('yes');
   } else {
-    console.log('no');
     mainWhiteSquare.style.borderStyle = 'solid';
     mainWhiteSquare.style.borderColor = 'white';
     mainWhiteSquare.style.borderWidth = '2px';
