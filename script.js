@@ -49,7 +49,6 @@ topBar.addEventListener('click', () => {
     if (heartLives) {
       faces.style.display = 'none';
       heartShapedBox.forEach(h => h.style.display = 'inline');
-      console.log(heartShapedBox);
     } else {
       heartShapedBox.forEach(h => h.style.display = 'none');
       faces.style.display = 'inline';
@@ -58,7 +57,7 @@ topBar.addEventListener('click', () => {
   }
 });
 song.addEventListener('ended', () => { currentlyPlayingSong = true; });
-song.addEventListener('canplaythrough', () => { canPlaySong = true; console.log(song); });
+song.addEventListener('canplaythrough', () => { canPlaySong = true; });
 answerButtons.forEach(b => {
   b.addEventListener('click', AnswerQuestion);
 });
@@ -267,7 +266,6 @@ function PlaySong() {
   if (canPlaySong && !currentlyPlayingSong) {
     currentlyPlayingSong = true;
     song.play();
-    console.log(song);
     song.volume = 0.5;
   }
 }
@@ -306,9 +304,7 @@ function BorderStyleSwap() {
     mainWhiteSquare.style.borderColor = 'green';
     mainWhiteSquare.style.borderWidth = '2px';
     mainWhiteSquare.style.borderRadius = '5%';
-    console.log('yes');
   } else {
-    console.log('no');
     mainWhiteSquare.style.borderStyle = 'solid';
     mainWhiteSquare.style.borderColor = 'white';
     mainWhiteSquare.style.borderWidth = '2px';
