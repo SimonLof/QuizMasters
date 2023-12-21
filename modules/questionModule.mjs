@@ -1,6 +1,6 @@
 import allQuestionsOrdered from "../questions/qa.js";
 
-export function GetRandomQuestions(params) {
+export function getRandomQuestions(params) {
   for (let i = allQuestionsOrdered.length - 1; i > 0; i--) {
     const randIndex = Math.floor(Math.random() * (i + 1));
     const temp = allQuestionsOrdered[i];

@@ -1,5 +1,5 @@
 //#region Variabler
-import { GetRandomQuestions } from "./modules/questionModule.mjs";
+import { getRandomQuestions } from "./modules/questionModule.mjs";
 const mainWhiteSquare = document.querySelector('main');
 const topBar = document.querySelector('.top-bar');
 const game = document.querySelector(".game"); // Hela gamerutan
@@ -36,7 +36,7 @@ let canClick = true;
 let currentlyPlayingSong = false;
 let canPlaySong = false;
 
-let randomizedQuestions = GetRandomQuestions();
+let randomizedQuestions = getRandomQuestions();
 let currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 const xmaxGreeting = ['God jul!', '¡Feliz Navidad!', 'Joyeux Noël!', 'Frohe Weihnachten!', 'Buon Natale!', 'Feliz Natal!', 'Crăciun Fericit!', 'Glædelig Jul!', 'Hyvää Joulua!', 'Gleðileg Jól!', 'Wesołych Świąt!', 'Vrolijk Kerstfeest!', 'Sretan Božić!', 'Veselé Vánoce!', 'Felicem Natalem Christi!', 'Nollaig Shona!', 'Merry Christmas!', 'Happy Holidays!'];
 //#endregion
@@ -59,25 +59,25 @@ topBar.addEventListener('click', () => {
 song.addEventListener('ended', () => { currentlyPlayingSong = false; });
 song.addEventListener('canplaythrough', () => { canPlaySong = true; });
 answerButtons.forEach(b => {
-  b.addEventListener('click', AnswerQuestion);
+  b.addEventListener('click', answerQuestion);
 });
 quitButton.addEventListener('click', quit);
 startButton.addEventListener('click', StartGame);
 // Tryck på loggan för att testa border
-logo.addEventListener('click', BorderStyleSwap);
+logo.addEventListener('click', borderStyleSwap);
 menuGreeting.addEventListener('click', NewRandomGreeting);
 //#endregion
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
 
 function __main() {
-  TurnOffHoverEffect();
-  SetHighScore();
-  GameMenu(true);
+  turnOffHoverEffect();
+  setHighScore();
+  gameMenu(true);
 }
 
 //#region Menu stuff
-function TurnOffHoverEffect() {
+function turnOffHoverEffect() {
   answerButtons.forEach(b => updateButtonColor(b, 'white'));
 }
 
@@ -85,7 +85,7 @@ function quit() {
   window.location.href = quitLink;
 }
 
-function GameMenu(firstTime = false) {
+function gameMenu(firstTime = false) {
   menuState = true;
   NewRandomGreeting();
   menu.style.display = 'flex';
@@ -97,8 +97,8 @@ function GameMenu(firstTime = false) {
 
 function StartGame() {
   menu.style.display = 'none';
-  UpdateHearts(true);
-  UpdateScore(true);
+  updateHearts(true);
+  updateScore(true);
   fillQuestion();
   canClick = true;
   menuState = false;
@@ -114,17 +114,17 @@ function NewRandomGreeting() {
 }
 //#endregion
 
-function DeathFunction() {
+function deathFunction() {
   // reset the game
-  SetHighScore();
-  GameMenu();
-  TurnOffHoverEffect();
-  randomizedQuestions = GetRandomQuestions();
+  setHighScore();
+  gameMenu();
+  turnOffHoverEffect();
+  randomizedQuestions = getRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
 }
 
 //#region Question stuff
-function GetButtonWCorrectAnswer() {
+function getButtonWCorrectAnswer() {
   let result;
   answerButtons.forEach(b => {
     if (b.textContent === currentQuestion.correctAnswer) {
@@ -134,25 +134,25 @@ function GetButtonWCorrectAnswer() {
   return result;
 }
 
-function AnswerQuestion(event) {
+function answerQuestion(event) {
   if (canClick) {
     canClick = false;
-    TurnOffHoverEffect();
+    turnOffHoverEffect();
     if (event.target.textContent === currentQuestion.correctAnswer) {
-      CorrectAnswer(event);
+      correctAnswer(event);
     }
     else {
-      WrongAnswer(event);
+      wrongAnswer(event);
     }
     if (lives > 0)
-      NextQuestion();
+      nextQuestion();
     else {
-      DeathFunction();
+      deathFunction();
     }
   }
 }
 
-function NextQuestion() {
+function nextQuestion() {
   randomizedQuestions.pop();
   if (randomizedQuestions.length > 0) {
     currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
@@ -162,25 +162,25 @@ function NextQuestion() {
     }, 2000);
   }
   else {
-    DeathFunction();
-    GameMenu();
+    deathFunction();
+    gameMenu();
     canClick = false;
   }
 }
 
-function CorrectAnswer(event) {
-  UpdateScore();
+function correctAnswer(event) {
+  updateScore();
   updateButtonColor(event.target, 'green');
-  StopTimer();
+  stopTimer();
 }
 
-function WrongAnswer(event) {
-  UpdateHearts();
-  StopTimer();
+function wrongAnswer(event) {
+  updateHearts();
+  stopTimer();
   if (event) {
     updateButtonColor(event.target, 'red');
   }
-  updateButtonColor(GetButtonWCorrectAnswer(), 'lightgreen');
+  updateButtonColor(getButtonWCorrectAnswer(), 'lightgreen');
 }
 
 function updateButtonColor(button, bgColor = '') {
@@ -200,12 +200,12 @@ function fillQuestion() {
     }
     answerButtons[randInt].textContent = a;
   });
-  StartTimer();
+  startTimer();
 }
 //#endregion
 
 //#region Timer stuff
-function StartTimer() {
+function startTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
     const newValue = `${(currentTime / timeToAnswer) * 100}`;
@@ -220,24 +220,24 @@ function StartTimer() {
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
       canClick = false;
-      WrongAnswer();
+      wrongAnswer();
       if (lives > 0) {
-        NextQuestion();
+        nextQuestion();
       }
       else {
-        DeathFunction();
+        deathFunction();
       }
     }
   }, 1000 / 60);
 }
 
-function StopTimer() {
+function stopTimer() {
   clearInterval(myTimer);
 }
 //#endregion
 
 //#region Score stuff
-function SetHighScore() {
+function setHighScore() {
   let currentHighscore = JSON.parse(window.localStorage.getItem('highScore'));
   if (currentHighscore === null || points > currentHighscore) {
     window.localStorage.setItem('highScore', JSON.stringify(points));
@@ -248,7 +248,7 @@ function SetHighScore() {
   highsoreBoard.innerHTML = currentHighscore;
 }
 
-function UpdateScore(reset = false) {
+function updateScore(reset = false) {
   if (reset) {
     points = 0;
   }
@@ -258,7 +258,7 @@ function UpdateScore(reset = false) {
       comeBack(starBoard);
     }, 250);
     points++;
-    SetHighScore();
+    setHighScore();
   }
   if (points > 20)
     PlaySong();
@@ -278,7 +278,7 @@ function comeBack(element) {
 }
 //#endregion
 
-function UpdateHearts(reset = false) {
+function updateHearts(reset = false) {
   if (reset === true) {
     lives = maxLives;
     if (heartLives) {
@@ -301,7 +301,7 @@ function UpdateHearts(reset = false) {
 };
 
 //#region border test
-function BorderStyleSwap() {
+function borderStyleSwap() {
   if (mainWhiteSquare.style.borderStyle === 'solid') {
     mainWhiteSquare.style.borderStyle = 'double';
     mainWhiteSquare.style.borderColor = 'green';
