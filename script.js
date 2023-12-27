@@ -62,10 +62,10 @@ answerButtons.forEach(b => {
   b.addEventListener('click', answerQuestion);
 });
 quitButton.addEventListener('click', quit);
-startButton.addEventListener('click', StartGame);
+startButton.addEventListener('click', startGame);
 // Tryck på loggan för att testa border
 logo.addEventListener('click', borderStyleSwap);
-menuGreeting.addEventListener('click', NewRandomGreeting);
+menuGreeting.addEventListener('click', newRandomGreeting);
 //#endregion
 
 __main(); // Kör allt i main, därför att ha kod som körs på olika ställen lite randomly i dokumentet :((((((((((
@@ -87,7 +87,7 @@ function quit() {
 
 function gameMenu(firstTime = false) {
   menuState = true;
-  NewRandomGreeting();
+  newRandomGreeting();
   menu.style.display = 'flex';
   if (!firstTime) {
     menuText.textContent = 'Du fick ' + points + " poäng.";
@@ -95,7 +95,7 @@ function gameMenu(firstTime = false) {
   canClick = false;
 }
 
-function StartGame() {
+function startGame() {
   menu.style.display = 'none';
   updateHearts(true);
   updateScore(true);
@@ -104,7 +104,7 @@ function StartGame() {
   menuState = false;
 }
 
-function NewRandomGreeting() {
+function newRandomGreeting() {
   let randomGreeting = Math.floor(Math.random() * xmaxGreeting.length);
   while (menuGreeting.textContent === xmaxGreeting[randomGreeting]) {
     // gör att det inte blir samma greeting 2 gånger på raken.
@@ -116,11 +116,11 @@ function NewRandomGreeting() {
 
 function deathFunction() {
   // reset the game
-  setHighScore();
-  gameMenu();
-  turnOffHoverEffect();
   randomizedQuestions = getRandomQuestions();
   currentQuestion = randomizedQuestions[randomizedQuestions.length - 1];
+  setHighScore();
+  turnOffHoverEffect();
+  gameMenu();
 }
 
 //#region Question stuff
@@ -138,17 +138,8 @@ function answerQuestion(event) {
   if (canClick) {
     canClick = false;
     turnOffHoverEffect();
-    if (event.target.textContent === currentQuestion.correctAnswer) {
-      correctAnswer(event);
-    }
-    else {
-      wrongAnswer(event);
-    }
-    if (lives > 0)
-      nextQuestion();
-    else {
-      deathFunction();
-    }
+    event.target.textContent === currentQuestion.correctAnswer ? correctAnswer(event) : wrongAnswer(event);
+    lives > 0 ? nextQuestion() : deathFunction();
   }
 }
 
@@ -163,7 +154,6 @@ function nextQuestion() {
   }
   else {
     deathFunction();
-    gameMenu();
     canClick = false;
   }
 }
@@ -177,9 +167,8 @@ function correctAnswer(event) {
 function wrongAnswer(event) {
   updateHearts();
   stopTimer();
-  if (event) {
-    updateButtonColor(event.target, 'red');
-  }
+  // kortare if-sats, funkar bara om det bara är en sak som görs och det inte finns en else.
+  event && updateButtonColor(event.target, 'red');
   updateButtonColor(getButtonWCorrectAnswer(), 'lightgreen');
 }
 
@@ -209,24 +198,14 @@ function startTimer() {
   let currentTime = timeToAnswer;
   myTimer = setInterval(() => {
     const newValue = `${(currentTime / timeToAnswer) * 100}`;
-    if (newValue > 60) {
-      timeBar.style.backgroundColor = `green`;
-    } else if (newValue > 30) {
-      timeBar.style.backgroundColor = `orange`;
-    } else {
-      timeBar.style.backgroundColor = `red`;
-    }
+    // om över 60 -> grön, över 30 -> orange, under 30 -> röd.
+    timeBar.style.backgroundColor = newValue > 60 ? `green` : newValue > 30 ? `orange` : `red`;
     timeBar.style.width = `${newValue}%`;
     currentTime -= 1 / 60;
     if (currentTime <= 0) {
       canClick = false;
       wrongAnswer();
-      if (lives > 0) {
-        nextQuestion();
-      }
-      else {
-        deathFunction();
-      }
+      lives > 0 ? nextQuestion() : deathFunction();
     }
   }, 1000 / 60);
 }
@@ -259,13 +238,13 @@ function updateScore(reset = false) {
     }, 250);
     points++;
     setHighScore();
+    // kortare if-sats.
+    points >= 20 && playSong();
   }
-  if (points > 20)
-    PlaySong();
   scoreBoard.innerHTML = points;
 }
 
-function PlaySong() {
+function playSong() {
   if (canPlaySong && !currentlyPlayingSong) {
     currentlyPlayingSong = true;
     song.play();
